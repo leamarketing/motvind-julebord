@@ -188,13 +188,12 @@ form .knapp{width:100%}
 .kartknapp:hover{background:#163a2f}
 
 /* Vertsnissen: rundt bilde med nisselue (vises bare når bildet finnes) */
-.nissehode{position:relative;display:inline-block;width:var(--s,96px);height:var(--s,96px)}
-.nissehode img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid #fff;box-shadow:0 8px 22px rgba(0,0,0,.3)}
-.nissehode svg{position:absolute;left:-14%;top:-58%;width:118%;transform:rotate(-14deg);pointer-events:none}
+.nissehode{position:relative;display:inline-block;width:var(--s,96px)}
+.nissehode img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35))}
 .flyter{position:absolute;z-index:2}
-.flyter.a{--s:110px;left:5%;bottom:110px;transform:rotate(-8deg)}
-.flyter.b{--s:92px;right:6%;bottom:190px;transform:rotate(9deg)}
-.vert .nissehode{--s:84px;flex:0 0 auto;margin-top:22px}
+.flyter.a{--s:150px;left:4%;bottom:70px;transform:rotate(-6deg)}
+.flyter.b{--s:120px;right:5%;bottom:150px;transform:rotate(7deg)}
+.vert .nissehode{--s:92px;flex:0 0 auto;margin:-46px 0 -22px}
 @media (max-width:1060px){.flyter{display:none!important}}
 @media (max-width:760px){.kart{grid-template-columns:1fr}}
 
@@ -484,13 +483,12 @@ document.getElementById("kalender").addEventListener("click", () => {
   foto.src = "bidos.jpg";
 })();
 
-// Vertsnissen: bildet gaute.png legges i samme mappe. Finnes det ikke, vises ingenting.
+// Vertsnissen: gaute.png (Gaute som julenisse, uten bakgrunn). Finnes det ikke, vises ingenting.
 (function(){
-  const lue = '<svg viewBox="0 0 120 90" aria-hidden="true"><path d="M14 70 C30 20 70 0 104 14 C92 22 86 34 86 50 Z" fill="#c62f27"/><path d="M14 70 C30 20 70 0 104 14 C96 18 90 24 88 32 C70 22 40 34 28 70 Z" fill="#a8241d"/><rect x="4" y="62" width="100" height="22" rx="11" fill="#fff"/><circle cx="106" cy="16" r="11" fill="#fff"/></svg>';
   const test = new Image();
   test.onload = () => {
     document.querySelectorAll(".nissehode").forEach(el => {
-      el.innerHTML = '<img src="gaute.png" alt="">' + lue; el.hidden = false;
+      el.innerHTML = '<img src="gaute.png" alt="">'; el.hidden = false;
     });
     const v = document.getElementById("vert-hode");
     v.querySelector("img").alt = "Vertsnissen Gaute Grøtta Grav";
