@@ -580,8 +580,16 @@ document.getElementById("kalender").addEventListener("click", () => {
     knapp.classList.add("vis"); vis(false);
     setTimeout(() => {
       spill().catch(() => {
-        const forsteTrykk = () => { if(!stoppetAvBruker && lyd.paused) spill().catch(()=>{}); };
-        ["pointerdown","keydown","touchstart"].forEach(t => addEventListener(t, forsteTrykk, {once:true, capture:true}));
+        // Starter ved første ekte trykk på siden. Trykk på selve sangknappen håndteres av knappen,
+        // ellers ville samme trykk både starte og pause sangen. Lytterne fjernes først når sangen faktisk spiller.
+        const typer = ["click","touchend","keydown"];
+        const forsteTrykk = (e) => {
+          if(e.target && e.target.closest && e.target.closest("#sang")) { fjern(); return; }
+          if(stoppetAvBruker || !lyd.paused) { fjern(); return; }
+          spill().then(fjern).catch(()=>{});
+        };
+        const fjern = () => typer.forEach(t => removeEventListener(t, forsteTrykk, true));
+        typer.forEach(t => addEventListener(t, forsteTrykk, true));
       });
     }, 3000);
   }).catch(()=>{});
