@@ -154,6 +154,25 @@ form .knapp{width:100%}
 .plass-skjema{display:block;margin-top:16px;background:var(--rod);color:#fff;font-weight:800;text-align:center;border-radius:10px;padding:10px 14px}
 @media (prefers-reduced-motion:reduce){.plasser{animation:none}}
 
+/* Plakatstil: røde og grønne bannere, plakaten og artistene */
+.alder{margin:14px 0 0;font-size:.82rem;color:#c5d3cc;letter-spacing:.02em}
+.info-liste li.liten{font-size:.9rem;color:var(--dempet)}
+.banner{display:flex;justify-content:center;margin:0 auto 34px;max-width:860px}
+.banner span{position:relative;display:block;text-align:center;color:#fffaf0;font:italic 700 clamp(1.15rem,3vw,1.7rem)/1.25 Fraunces,Georgia,serif;
+  padding:14px 54px;clip-path:polygon(0 0,100% 0,calc(100% - 22px) 50%,100% 100%,0 100%,22px 50%);box-shadow:inset 0 -4px 0 rgba(0,0,0,.15)}
+.banner.rod span{background:linear-gradient(180deg,#c9342c,#a3241e)}
+.banner.gronn{margin:26px auto 0}
+.banner.gronn span{background:linear-gradient(180deg,#2a6a4f,#1d4a3c);font-size:clamp(1rem,2.4vw,1.25rem)}
+.program-wrap{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:32px;align-items:center;margin-bottom:6px}
+.plakat{margin:0;transform:rotate(-1.5deg)}
+.plakat img{display:block;width:100%;height:auto;border-radius:10px;border:8px solid #fff;box-shadow:0 18px 40px rgba(13,31,26,.25)}
+.kort.artister{margin-top:18px;background:var(--papir)}
+.kort.artister ul{list-style:none;padding:0;margin:6px 0 0}
+.kort.artister li{padding:9px 0;border-bottom:1px dashed var(--linje);font-size:1.05rem;color:var(--blekk)}
+.kort.artister li:last-child{border:0}
+.kort.artister li::before{content:"✦ ";color:var(--rod)}
+@media (max-width:760px){.program-wrap{grid-template-columns:1fr}.plakat{max-width:340px;margin:0 auto}.banner span{padding:12px 34px}}
+
 /* Motvind-varden med fyr og nisselue */
 .toplogo{display:block;width:min(240px,60vw);height:auto;margin:6px auto 16px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.35))}
 .varde{position:relative;display:inline-block;width:var(--v,70px);aspect-ratio:240/432;pointer-events:none}
@@ -253,6 +272,7 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
       <div><b>Fra kl. 18.00</b><span>Velkommen</span></div>
       <div><b>Slettelva</b><span>Grendehus</span><a class="til-adresse" href="#kart">adresse nederst</a></div>
     </div>
+    <p class="alder">16-årsgrense, i følge med foresatte</p>
     <a class="knapp" href="#pamelding">Meld meg på <span aria-hidden="true">→</span></a>
     <p class="teller" id="teller" aria-live="polite"></p>
   </div>
@@ -260,10 +280,27 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
 
 <main>
   <div class="bredde">
-    <span class="over">Kveldens program</span>
-    <h2>Mat, musikk og godt lag</h2>
+    <div class="banner rod"><span>Julebord, skjemt og alvor med «Någgå' attåt'»</span></div>
+    <div class="program-wrap">
+      <figure class="plakat">
+        <img src="plakat.jpg" width="480" height="678" loading="lazy" alt="Plakaten for julebordet: Julebord, skjemt og alvor med «Någgå' attåt'». Slettaelva Grendehus torsdag 10. desember fra kl. 18.00. Artister: Ingvar Olsen og «Los Las Vegas», Elida Andersen, Micare og Martin Brox. Tradisjonsbuffet inkludert «Bidos Spesial».">
+      </figure>
+      <div>
+        <span class="over">Kveldens program</span>
+        <h2>Mat, musikk og godt lag</h2>
+        <div class="kort artister">
+          <div class="ikon" aria-hidden="true"><span class="mic" id="mic">🎤</span></div>
+          <h3>Artister</h3>
+          <ul>
+            <li><b>Ingvar Olsen</b> (Idol) med «Los Las Vegas»</li>
+            <li><b>Elida Andersen</b></li>
+            <li><b>Micare</b></li>
+            <li><b>Martin Brox</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="program">
-      <div class="kort"><div class="ikon" aria-hidden="true"><span class="mic" id="mic">🎤</span></div><h3>Ingvar Olsen (Idol)</h3><p>med «Los Las Vegas».</p></div>
       <div class="kort mat"><div class="bilde" id="bidos-bilde" role="img" aria-label="Bidos, varm reinsdyrgryte"></div>
         <div class="tekst"><h3>Tradisjonsbuffet</h3><p>Inkludert «Bidos Spesial», den varme reinsdyrgryta fra nord.</p><span class="kreditt" id="bidos-kreditt"></span></div></div>
       <div class="kort"><div class="ikon dansere" aria-hidden="true"><span>💃</span><span>🕺</span><span>🎶</span></div><h3>Musikk og dans</h3><p>Skjemt og alvor, og plass på dansegulvet.</p></div>
@@ -273,6 +310,7 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
       <div class="nissehode" id="vert-hode" hidden></div>
       <p>Kvelden ledes av <b>«vertsnissen med julepuls»</b>, Gaute Grøtta Grav.</p>
     </div>
+    <div class="banner gronn"><span>Lukket arrangement. Begrenset plass. Påmelding!</span></div>
 
     <section class="skjema-wrap" id="pamelding" aria-labelledby="pam-tittel">
       <div>
@@ -282,6 +320,7 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
           <li><span aria-hidden="true">🎄</span><span>Gratis mat og underholdning for medlemmer av Motvind.</span></li>
           <li><span aria-hidden="true">👫</span><span>Du kan ta med <b>én ledsager</b>. Ledsageren betaler <b>50 kroner i døra</b>.</span></li>
           <li><span aria-hidden="true">🔒</span><span>Lukket arrangement, med begrenset plass.</span></li>
+          <li class="liten"><span aria-hidden="true">🔞</span><span>16-årsgrense, i følge med foresatte.</span></li>
         </ul>
         <p class="viktig">Påmelding er viktig, så kjøkkenet vet hvor mange de skal lage mat til. Vær så snill!</p>
         <p class="plass-skjema" id="plass-skjema">Kun 75 plasser. Først til mølla!</p>
