@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Julebord Motvind Troms 2026</title>
+<meta name="description" content="Påmelding til gratis julebord for medlemmer i Motvind Troms. Slettelva Grendehus torsdag 10. desember kl. 18.00. Mat, musikk og dans.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Julebord, skjemt og alvor med «Någgå' attåt'»">
+<meta property="og:description" content="Motvind Troms inviterer medlemmene til gratis julebord. Slettelva Grendehus, torsdag 10. desember kl. 18.00. Meld deg på her.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --natt:#0d1f1a; --natt2:#123128; --gran:#1d4a3c; --gull:#e8b04b; --gull2:#f5d58a;
+  --rod:#b8322b; --rod2:#9c2620; --sno:#fbf8f1; --papir:#fffdf8; --blekk:#1b2420;
+  --dempet:#55625c; --linje:#dcd6c8; --feil:#b3261e; --r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--natt);color:var(--blekk);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+
+.hero{position:relative;overflow:hidden;color:var(--sno);padding:56px 16px 120px;text-align:center;
+  background:
+    radial-gradient(1200px 500px at 50% -10%, rgba(232,176,75,.22), transparent 60%),
+    radial-gradient(800px 400px at 15% 20%, rgba(80,190,150,.16), transparent 60%),
+    radial-gradient(700px 380px at 90% 30%, rgba(184,50,43,.18), transparent 60%),
+    linear-gradient(180deg,var(--natt) 0%,var(--natt2) 100%);}
+#sno{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.hero-inn{position:relative;max-width:820px;margin:0 auto}
+.merke{display:inline-flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;color:var(--gull2);
+  border:1px solid rgba(232,176,75,.4);border-radius:999px;padding:7px 16px;background:rgba(0,0,0,.18)}
+h1{font-family:Fraunces,Georgia,serif;font-weight:900;font-size:clamp(2.4rem,7.5vw,4.6rem);line-height:1.02;margin:22px 0 10px;letter-spacing:-.01em}
+h1 .sitat{display:block;color:var(--gull);font-style:italic;font-weight:700;font-size:.62em;margin-top:10px}
+.ingress{font-size:clamp(1.05rem,2.6vw,1.25rem);max-width:640px;margin:18px auto 0;color:#e4ebe6}
+.ingress strong{color:var(--gull2)}
+.gratis{display:inline-block;margin-top:26px;font-family:Fraunces,Georgia,serif;font-weight:900;font-size:clamp(1.5rem,4vw,2rem);
+  color:var(--natt);background:var(--gull);padding:8px 26px;border-radius:12px;transform:rotate(-2deg);box-shadow:0 10px 30px rgba(232,176,75,.3)}
+.fakta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:760px;margin:34px auto 0}
+.fakta div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:14px 10px}
+.fakta b{display:block;font-family:Fraunces,Georgia,serif;font-size:1.25rem;color:#fff}
+.fakta span{font-size:.85rem;color:#c5d3cc}
+.til-adresse{display:block;margin-top:2px;font-size:.72rem;color:var(--gull2);text-decoration:underline;text-underline-offset:2px}
+.til-adresse:hover{color:#fff}
+.knapp{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;cursor:pointer;font:700 1.08rem Inter,sans-serif;
+  background:var(--rod);color:#fff;padding:17px 32px;border-radius:999px;text-decoration:none;box-shadow:0 10px 28px rgba(184,50,43,.38);transition:transform .15s,background .15s}
+.knapp:hover{background:var(--rod2);transform:translateY(-1px)}
+.knapp:focus-visible,input:focus-visible,textarea:focus-visible,.valg input:focus-visible+span{outline:3px solid var(--gull);outline-offset:3px}
+.hero .knapp{margin-top:34px}
+.teller{margin-top:14px;font-size:.92rem;color:#c5d3cc;min-height:1.4em}
+
+main{background:var(--sno);border-radius:32px 32px 0 0;margin-top:-56px;position:relative;padding:56px 16px 40px}
+.bredde{max-width:980px;margin:0 auto}
+h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;margin:0 0 8px;color:var(--natt)}
+.over{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;color:var(--rod)}
+.program{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin:26px 0 8px}
+.kort{background:var(--papir);border:1px solid var(--linje);border-radius:var(--r);padding:22px 20px}
+.kort .ikon{font-size:1.9rem;line-height:1}
+.kort h3{font-family:Fraunces,Georgia,serif;font-size:1.2rem;margin:12px 0 6px;color:var(--natt)}
+.kort p{margin:0;color:var(--dempet);font-size:.97rem}
+.vert{margin-top:16px;display:flex;gap:18px;align-items:center;background:var(--gran);color:var(--sno);border-radius:var(--r);padding:22px 24px}
+.vert .ikon{font-size:2.6rem}
+.vert p{margin:0}
+.vert b{color:var(--gull2)}
+
+.skjema-wrap{margin-top:56px;display:grid;grid-template-columns:1fr 1.35fr;gap:32px;align-items:start}
+.info-liste{list-style:none;padding:0;margin:18px 0 0}
+.info-liste li{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--linje)}
+.info-liste li span:first-child{flex:0 0 26px;font-size:1.2rem}
+.viktig{margin-top:22px;background:#fff4e0;border-left:5px solid var(--gull);padding:16px 18px;border-radius:10px;font-weight:500}
+form{background:var(--papir);border-radius:20px;padding:28px 24px}
+/* Julepynt rundt skjemaet */
+.pynt{position:relative;margin-top:44px;padding:12px;border-radius:30px;
+  background:repeating-linear-gradient(45deg,var(--rod) 0 14px,#fff 14px 28px,var(--gran) 28px 42px,#fff 42px 56px);
+  box-shadow:0 24px 60px rgba(13,31,26,.18)}
+.pynt::before{content:"";position:absolute;left:-6px;right:-6px;top:-30px;height:58px;z-index:2;pointer-events:none;background-repeat:repeat-x;background-size:240px 58px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='58' viewBox='0 0 240 58'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M0 12 Q60 40 120 12 T240 12' stroke='%231d4a3c' stroke-width='13'/%3E%3Cpath d='M0 12 Q60 40 120 12 T240 12' stroke='%23347a5f' stroke-width='5' stroke-dasharray='2 6'/%3E%3Cpath d='M60 26 V36 M180 26 V36' stroke='%23c9a45a' stroke-width='1.5'/%3E%3C/g%3E%3Ccircle cx='60' cy='44' r='9' fill='%23b8322b'%3E%3Canimate attributeName='fill' values='%23b8322b;%23ff5a4f;%23b8322b' dur='1.8s' repeatCount='indefinite'/%3E%3C/circle%3E%3Ccircle cx='57' cy='41' r='2.5' fill='%23fff' opacity='.6'/%3E%3Crect x='56' y='33' width='8' height='4' rx='1' fill='%23c9a45a'/%3E%3Ccircle cx='180' cy='44' r='9' fill='%23e8b04b'%3E%3Canimate attributeName='fill' values='%23e8b04b;%23fff1b8;%23e8b04b' dur='2.2s' begin='.7s' repeatCount='indefinite'/%3E%3C/circle%3E%3Ccircle cx='177' cy='41' r='2.5' fill='%23fff' opacity='.6'/%3E%3Crect x='176' y='33' width='8' height='4' rx='1' fill='%23c9a45a'/%3E%3Ccircle cx='0' cy='12' r='5' fill='%23ff5a4f'%3E%3Canimate attributeName='opacity' values='1;.25;1' dur='1.5s' repeatCount='indefinite'/%3E%3C/circle%3E%3Ccircle cx='120' cy='12' r='5' fill='%23ffe08a'%3E%3Canimate attributeName='opacity' values='.25;1;.25' dur='1.5s' repeatCount='indefinite'/%3E%3C/circle%3E%3Ccircle cx='240' cy='12' r='5' fill='%23ff5a4f'%3E%3Canimate attributeName='opacity' values='1;.25;1' dur='1.5s' repeatCount='indefinite'/%3E%3C/circle%3E%3C/svg%3E")}
+.pynt::after{content:"★";position:absolute;top:-52px;left:50%;transform:translateX(-50%);z-index:3;font-size:46px;line-height:1;color:var(--gull);
+  text-shadow:0 0 18px rgba(232,176,75,.8),0 2px 0 #b8862e;pointer-events:none}
+.pynt .hjorne{position:absolute;bottom:-14px;font-size:30px;z-index:3;pointer-events:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.25))}
+.pynt .hjorne.v{left:-10px;transform:rotate(-14deg)}
+.pynt .hjorne.h{right:-10px;transform:rotate(14deg)}
+.felt{margin-bottom:18px}
+label,.etikett{display:block;font-weight:600;margin-bottom:6px;color:var(--natt)}
+.valgfri{font-weight:400;color:var(--dempet);font-size:.9rem}
+input[type=text],input[type=tel],input[type=email],textarea{width:100%;font:inherit;font-size:1.05rem;padding:13px 14px;border:1.5px solid #8f8778;border-radius:12px;background:#fff;color:var(--blekk)}
+textarea{min-height:84px;resize:vertical}
+.rad{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hjelp{font-size:.88rem;color:var(--dempet);margin-top:5px}
+.valg-gruppe{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.valg{position:relative;cursor:pointer;margin:0}
+.valg input{position:absolute;opacity:0}
+.valg span{display:block;border:1.5px solid #8f8778;border-radius:14px;padding:14px;text-align:center;font-weight:600;background:#fff;transition:all .15s;height:100%}
+.valg span small{display:block;font-weight:400;color:var(--dempet);font-size:.85rem;margin-top:2px}
+.valg input:checked+span{border-color:var(--gran);background:#e8f2ed;box-shadow:inset 0 0 0 1px var(--gran)}
+.skjult{display:none!important}
+.medlemskap{border:1.5px dashed var(--gull);border-radius:14px;padding:14px 16px 10px;background:#fff9ec}
+.medlemskap legend{padding:0 6px}
+.avkryss{display:flex;gap:12px;align-items:flex-start;font-weight:500;margin:6px 0 8px;cursor:pointer}
+.avkryss input{width:22px;height:22px;margin-top:2px;flex:0 0 auto;accent-color:var(--gran)}
+.samtykke{display:flex;gap:12px;align-items:flex-start;font-weight:400;font-size:.93rem;color:var(--dempet);margin:6px 0 20px}
+.samtykke input{width:22px;height:22px;margin-top:2px;flex:0 0 auto;accent-color:var(--gran)}
+.feilmelding{color:var(--feil);font-size:.9rem;margin-top:5px;display:none}
+.ugyldig input,.ugyldig textarea{border-color:var(--feil)}
+.ugyldig .feilmelding{display:block}
+form .knapp{width:100%}
+.knapp[disabled]{opacity:.65;cursor:progress;transform:none}
+.status{margin-top:14px;padding:14px 16px;border-radius:12px;display:none;background:#fdecea;color:var(--feil)}
+.status.vis{display:block}
+.hp{position:absolute;left:-9999px}
+
+.takk{display:none;text-align:center;background:var(--papir);border-radius:20px;padding:40px 24px}
+.takk.vis{display:block}
+.takk:focus{outline:none}
+.takk .stjerne{font-size:3.4rem}
+.takk h3{font-family:Fraunces,Georgia,serif;font-size:2rem;margin:8px 0;color:var(--natt)}
+.oppsum{text-align:left;background:var(--sno);border-radius:14px;padding:16px 18px;margin:20px 0;font-size:.97rem}
+.oppsum div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px dashed var(--linje)}
+.oppsum div:last-child{border:0}
+.sekundar{background:transparent;color:var(--gran);border:2px solid var(--gran);box-shadow:none}
+.sekundar:hover{background:#e8f2ed}
+
+/* Blinkende julepynt (rolig takt, under 3 blink i sekundet) */
+.lysrekke{position:absolute;left:0;right:0;top:0;height:46px;z-index:1;pointer-events:none;display:flex;justify-content:space-around;
+  background:radial-gradient(ellipse 60px 30px at 50% -8px,transparent 0,transparent 100%)}
+.lysrekke::before{content:"";position:absolute;left:-2%;right:-2%;top:-30px;height:52px;border-bottom:2px solid rgba(20,40,32,.9);border-radius:0 0 50% 50%/0 0 22px 22px}
+.lysrekke i{position:relative;width:11px;height:17px;border-radius:50% 50% 45% 45%;margin-top:14px;background:var(--c);
+  box-shadow:0 0 12px 3px var(--c);animation:blink var(--t,1.6s) ease-in-out infinite;animation-delay:var(--d,0s)}
+.lysrekke i::before{content:"";position:absolute;top:-5px;left:2px;width:7px;height:6px;border-radius:2px;background:#2d3b35}
+.lysrekke i:nth-child(4n+1){--c:#ff5a4f;--d:0s}
+.lysrekke i:nth-child(4n+2){--c:#ffd36b;--d:.4s;--t:1.9s}
+.lysrekke i:nth-child(4n+3){--c:#6fe0a8;--d:.8s}
+.lysrekke i:nth-child(4n+4){--c:#7fc4ff;--d:1.2s;--t:2.1s}
+.lysrekke i:nth-child(odd){margin-top:20px}
+@keyframes blink{0%,100%{opacity:1;filter:brightness(1.2)}50%{opacity:.3;box-shadow:0 0 2px 0 var(--c);filter:brightness(.7)}}
+.glimt{animation:glimt 2.4s ease-in-out infinite}
+@keyframes glimt{0%,100%{filter:brightness(1) drop-shadow(0 0 0 rgba(255,215,120,0))}50%{filter:brightness(1.25) drop-shadow(0 0 12px rgba(255,215,120,.9))}}
+.pynt::after{animation:stjerne 2s ease-in-out infinite}
+@keyframes stjerne{0%,100%{text-shadow:0 0 18px rgba(232,176,75,.8),0 2px 0 #b8862e;opacity:1}50%{text-shadow:0 0 34px rgba(255,230,150,1),0 0 60px rgba(232,176,75,.6),0 2px 0 #b8862e;opacity:.85}}
+.pynt .hjorne{animation:bjelle 2.6s ease-in-out infinite}
+.pynt .hjorne.h{animation-delay:1.3s}
+@keyframes bjelle{0%,100%{filter:drop-shadow(0 3px 4px rgba(0,0,0,.25)) brightness(1)}50%{filter:drop-shadow(0 0 12px rgba(255,215,120,.95)) brightness(1.3)}}
+.gratis{animation:gratisglod 2.8s ease-in-out infinite}
+@keyframes gratisglod{0%,100%{box-shadow:0 10px 30px rgba(232,176,75,.3)}50%{box-shadow:0 10px 46px rgba(255,215,120,.75)}}
+@media (prefers-reduced-motion:reduce){.lysrekke i,.glimt,.pynt::after,.pynt .hjorne,.gratis{animation:none!important}}
+
+/* Begrenset plass */
+.plasser{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--rod);color:#fff;font:900 clamp(1.1rem,3.4vw,1.5rem) Inter,sans-serif;
+  letter-spacing:.06em;text-transform:uppercase;padding:10px 22px;border-radius:10px;border:2px solid #ffd36b;transform:rotate(1.5deg);
+  box-shadow:0 0 0 4px rgba(184,50,43,.35),0 10px 28px rgba(184,50,43,.5);animation:plasspuls 1.6s ease-in-out infinite}
+.plasser small{display:block;font:600 .8rem Inter,sans-serif;letter-spacing:.02em;text-transform:none;color:#ffe3a3}
+@keyframes plasspuls{0%,100%{transform:rotate(1.5deg) scale(1)}50%{transform:rotate(1.5deg) scale(1.05);box-shadow:0 0 0 8px rgba(184,50,43,.15),0 10px 36px rgba(255,90,79,.7)}}
+.plass-skjema{display:block;margin-top:16px;background:var(--rod);color:#fff;font-weight:800;text-align:center;border-radius:10px;padding:10px 14px}
+@media (prefers-reduced-motion:reduce){.plasser{animation:none}}
+
+/* Liv i kortene */
+.dansere{display:flex;gap:6px;font-size:2.3rem;line-height:1}
+.dansere span{display:inline-block;transform-origin:50% 100%}
+.dansere span:nth-child(1){animation:dans1 1.1s ease-in-out infinite}
+.dansere span:nth-child(2){animation:dans2 1.1s ease-in-out infinite}
+.dansere span:nth-child(3){animation:hopp .55s ease-in-out infinite;font-size:1.4rem;align-self:flex-start}
+@keyframes dans1{0%,100%{transform:rotate(-12deg) translateY(0)}25%{transform:rotate(0) translateY(-8px)}50%{transform:rotate(12deg) translateY(0)}75%{transform:rotate(0) translateY(-5px)}}
+@keyframes dans2{0%,100%{transform:rotate(12deg) translateY(-6px) scaleX(-1)}50%{transform:rotate(-12deg) translateY(0) scaleX(-1)}}
+@keyframes hopp{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-10px) rotate(10deg)}}
+.mic{display:inline-block;transform-origin:50% 90%}
+.mic.danser{animation:micdans .5s ease-in-out infinite}
+@keyframes micdans{0%,100%{transform:rotate(-16deg) scale(1)}25%{transform:rotate(0) translateY(-7px) scale(1.12)}50%{transform:rotate(16deg) scale(1)}75%{transform:rotate(0) translateY(-4px) scale(1.06)}}
+.kort.mat{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.kort.mat .bilde{height:160px;background:#3a2a1e center/cover no-repeat;position:relative}
+.kort.mat .bilde::after{content:"Bidos Spesial";position:absolute;left:12px;bottom:10px;background:var(--gull);color:var(--natt);font:800 .85rem Inter,sans-serif;padding:4px 10px;border-radius:999px}
+.kort.mat .bilde.tegnet{background:radial-gradient(circle at 50% 70%,#e8b04b 0,#b8622b 30%,#5a2a18 62%,#2a1710 100%);display:grid;place-items:center}
+.kort.mat .bilde .gryte{font-size:4.2rem;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));position:relative}
+.kort.mat .bilde .damp{position:absolute;left:50%;top:-6px;width:60px;margin-left:-30px;height:40px;pointer-events:none}
+.kort.mat .bilde .damp i{position:absolute;bottom:0;width:8px;height:26px;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(3px);animation:damp 2.4s ease-in infinite}
+.kort.mat .bilde .damp i:nth-child(1){left:10px}.kort.mat .bilde .damp i:nth-child(2){left:26px;animation-delay:.8s}.kort.mat .bilde .damp i:nth-child(3){left:42px;animation-delay:1.6s}
+@keyframes damp{0%{transform:translateY(0) scaleY(.6);opacity:0}30%{opacity:.9}100%{transform:translateY(-34px) scaleY(1.3);opacity:0}}
+.kort.mat .tekst{padding:18px 20px 22px}
+.kort.mat .kreditt{display:block;font-size:.72rem;color:var(--dempet);margin-top:8px}
+@media (prefers-reduced-motion:reduce){.dansere span,.mic.danser,.kort.mat .bilde .damp i{animation:none!important}}
+
+/* Kart */
+.kart{margin-top:64px;display:grid;grid-template-columns:1fr 1.4fr;gap:28px;align-items:center}
+.kart iframe{width:100%;height:340px;border:0;border-radius:var(--r);box-shadow:0 12px 34px rgba(13,31,26,.14);background:#e9e4d8}
+.adresse{font-size:1.15rem;margin:12px 0 18px;line-height:1.5}
+.adresse b{font-family:Fraunces,Georgia,serif;font-size:1.3rem;color:var(--natt)}
+.kartknapp{background:var(--gran);box-shadow:0 10px 24px rgba(29,74,60,.3);font-size:1rem;padding:14px 24px}
+.kartknapp:hover{background:#163a2f}
+
+/* Vertsnissen: rundt bilde med nisselue (vises bare når bildet finnes) */
+.nissehode{position:relative;display:inline-block;width:var(--s,96px);height:var(--s,96px)}
+.nissehode img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid #fff;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.nissehode svg{position:absolute;left:-14%;top:-58%;width:118%;transform:rotate(-14deg);pointer-events:none}
+.flyter{position:absolute;z-index:2}
+.flyter.a{--s:110px;left:5%;bottom:110px;transform:rotate(-8deg)}
+.flyter.b{--s:92px;right:6%;bottom:190px;transform:rotate(9deg)}
+.vert .nissehode{--s:84px;flex:0 0 auto;margin-top:22px}
+@media (max-width:1060px){.flyter{display:none!important}}
+@media (max-width:760px){.kart{grid-template-columns:1fr}}
+
+/* Julesang */
+.sang{position:fixed;right:16px;bottom:16px;z-index:50;display:none;align-items:center;gap:10px;background:var(--natt);color:#fff;
+  border:2px solid var(--gull);border-radius:999px;padding:8px 16px 8px 8px;box-shadow:0 12px 30px rgba(0,0,0,.35);font:600 .95rem Inter,sans-serif;cursor:pointer}
+.sang.vis{display:flex}
+.sang .rund{width:40px;height:40px;border-radius:50%;background:var(--rod);display:grid;place-items:center;font-size:1.1rem}
+.sang.pulser .rund{animation:puls 1.4s infinite}
+@keyframes puls{0%,100%{box-shadow:0 0 0 0 rgba(232,176,75,.7)}50%{box-shadow:0 0 0 12px rgba(232,176,75,0)}}
+@media (prefers-reduced-motion:reduce){.sang.pulser .rund{animation:none}}
+
+footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(--dempet);font-size:.88rem}
+
+@media (max-width:760px){
+  .skjema-wrap{grid-template-columns:1fr}
+  .fakta{grid-template-columns:1fr;max-width:340px}
+  .rad{grid-template-columns:1fr}
+  form{padding:22px 16px}
+  .vert{padding:18px}
+}
+@media (max-width:420px){.valg-gruppe{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){#sno{display:none}html{scroll-behavior:auto}.knapp,.valg span{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="sno" aria-hidden="true"></canvas>
+  <div class="lysrekke" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="flyter a nissehode" aria-hidden="true" hidden></div>
+  <div class="flyter b nissehode" aria-hidden="true" hidden></div>
+  <div class="hero-inn">
+    <span class="merke">Motvind Troms inviterer</span>
+    <h1>Julebord, skjemt og alvor <span class="sitat">med «Någgå' attåt'»</span></h1>
+    <p class="ingress">Motvind Troms og <strong>«vertsnissen med julepuls»</strong>, Gaute Grøtta Grav, inviterer medlemmene i Troms fylke til julebord med musikk og dans.</p>
+    <div class="gratis">GRATIS for medlemmer</div><br>
+    <div class="plasser" id="plasser"><span aria-hidden="true">🔥</span><span>Kun 100 plasser<small id="plasser-igjen">Meld deg på i dag, så du er sikret plass</small></span></div>
+    <div class="fakta">
+      <div><b>Torsdag 10. des.</b><span>2026</span></div>
+      <div><b>Fra kl. 18.00</b><span>Velkommen</span></div>
+      <div><b>Slettelva</b><span>Grendehus</span><a class="til-adresse" href="#kart">adresse nederst</a></div>
+    </div>
+    <a class="knapp" href="#pamelding">Meld meg på <span aria-hidden="true">→</span></a>
+    <p class="teller" id="teller" aria-live="polite"></p>
+  </div>
+</header>
+
+<main>
+  <div class="bredde">
+    <span class="over">Kveldens program</span>
+    <h2>Mat, musikk og godt lag</h2>
+    <div class="program">
+      <div class="kort"><div class="ikon" aria-hidden="true"><span class="mic" id="mic">🎤</span></div><h3>Ingvar Olsen (Idol)</h3><p>med «Los Las Vegas».</p></div>
+      <div class="kort mat"><div class="bilde" id="bidos-bilde" role="img" aria-label="Bidos, varm reinsdyrgryte"></div>
+        <div class="tekst"><h3>Tradisjonsbuffet</h3><p>Inkludert «Bidos Spesial», den varme reinsdyrgryta fra nord.</p><span class="kreditt" id="bidos-kreditt"></span></div></div>
+      <div class="kort"><div class="ikon dansere" aria-hidden="true"><span>💃</span><span>🕺</span><span>🎶</span></div><h3>Musikk og dans</h3><p>Skjemt og alvor, og plass på dansegulvet.</p></div>
+    </div>
+    <div class="vert">
+      <div class="ikon glimt" id="vert-ikon" aria-hidden="true">🎅</div>
+      <div class="nissehode" id="vert-hode" hidden></div>
+      <p>Kvelden ledes av <b>«vertsnissen med julepuls»</b>, Gaute Grøtta Grav.</p>
+    </div>
+
+    <section class="skjema-wrap" id="pamelding" aria-labelledby="pam-tittel">
+      <div>
+        <span class="over">Påmelding</span>
+        <h2 id="pam-tittel">Meld deg på, så vi vet hvor mye mat vi skal lage</h2>
+        <ul class="info-liste">
+          <li><span aria-hidden="true">🎄</span><span>Gratis mat og underholdning for medlemmer av Motvind.</span></li>
+          <li><span aria-hidden="true">👫</span><span>Du kan ta med <b>én ledsager</b>. Ledsageren betaler <b>50 kroner i døra</b>.</span></li>
+          <li><span aria-hidden="true">🔒</span><span>Lukket arrangement, med begrenset plass.</span></li>
+        </ul>
+        <p class="viktig">Påmelding er viktig, så kjøkkenet vet hvor mange de skal lage mat til. Vær så snill!</p>
+        <p class="plass-skjema" id="plass-skjema">Kun 100 plasser. Først til mølla!</p>
+      </div>
+
+      <div class="pynt">
+        <span class="hjorne v" aria-hidden="true">🔔</span><span class="hjorne h" aria-hidden="true">🔔</span>
+        <form id="skjema" novalidate>
+          <div class="felt" id="f-navn">
+            <label for="navn">Fullt navn</label>
+            <input type="text" id="navn" name="navn" autocomplete="name" required maxlength="120">
+            <p class="feilmelding">Skriv navnet ditt.</p>
+          </div>
+          <div class="rad">
+            <div class="felt" id="f-telefon">
+              <label for="telefon">Mobilnummer</label>
+              <input type="tel" id="telefon" name="telefon" autocomplete="tel" inputmode="tel" required maxlength="20">
+              <p class="feilmelding">Skriv et gyldig mobilnummer.</p>
+            </div>
+            <div class="felt" id="f-epost">
+              <label for="epost">E-post <span class="valgfri">(valgfritt)</span></label>
+              <input type="email" id="epost" name="epost" autocomplete="email" maxlength="160">
+              <p class="feilmelding">E-postadressen ser ikke riktig ut.</p>
+            </div>
+          </div>
+          <div class="felt">
+            <label for="bosted">Hvor kommer du fra? <span class="valgfri">(valgfritt)</span></label>
+            <input type="text" id="bosted" name="bosted" autocomplete="address-level2" maxlength="80" placeholder="F.eks. Nordreisa">
+          </div>
+
+          <fieldset class="felt" style="border:0;padding:0;margin:0 0 18px">
+            <legend class="etikett">Hvor mange kommer?</legend>
+            <div class="valg-gruppe">
+              <label class="valg"><input type="radio" name="antall" value="1" checked><span>Bare meg<small>Gratis</small></span></label>
+              <label class="valg"><input type="radio" name="antall" value="2"><span>Meg + 1 ledsager<small>Ledsager betaler 50 kr i døra</small></span></label>
+            </div>
+          </fieldset>
+          <div class="felt skjult" id="f-ledsager">
+            <label for="ledsager_navn">Ledsagerens navn <span class="valgfri">(valgfritt)</span></label>
+            <input type="text" id="ledsager_navn" name="ledsager_navn" maxlength="120">
+          </div>
+
+          <div class="felt">
+            <label for="matbehov">Allergier eller hensyn til maten? <span class="valgfri">(valgfritt)</span></label>
+            <textarea id="matbehov" name="matbehov" maxlength="500" placeholder="Gjelder både deg og en eventuell ledsager"></textarea>
+          </div>
+          <div class="felt">
+            <label for="hilsen">Hilsen til arrangørene <span class="valgfri">(valgfritt)</span></label>
+            <textarea id="hilsen" name="hilsen" maxlength="500"></textarea>
+          </div>
+
+          <fieldset class="felt medlemskap">
+            <legend class="etikett">Ønsker å bli medlem i Motvind? <span class="valgfri">(valgfritt)</span></legend>
+            <label class="avkryss"><input type="checkbox" id="vil_bli_medlem"><span>Jeg er ikke medlem ennå, men vil gjerne bli det</span></label>
+            <label class="avkryss skjult" id="f-ledsager-medlem"><input type="checkbox" id="ledsager_vil_bli_medlem"><span>Ledsageren min vil gjerne bli medlem</span></label>
+            <p class="hjelp">Motvind Troms tar kontakt med deg om medlemskap.</p>
+          </fieldset>
+
+          <div class="hp" aria-hidden="true"><label for="nettside">La stå tomt</label><input type="text" id="nettside" name="nettside" tabindex="-1" autocomplete="off"></div>
+
+          <div class="felt" id="f-samtykke" style="margin-bottom:0">
+            <label class="samtykke"><input type="checkbox" id="samtykke" required>
+              <span>Jeg er medlem i Motvind eller har krysset av for å bli det, og jeg godtar at Motvind Troms bruker opplysningene til å planlegge julebordet og til å ta kontakt om medlemskap hvis jeg har bedt om det. Opplysningene slettes etter arrangementet.</span></label>
+            <p class="feilmelding" style="margin-top:-14px;margin-bottom:14px">Kryss av for å fullføre påmeldingen.</p>
+          </div>
+
+          <button class="knapp" type="submit" id="send">Send påmelding</button>
+          <div class="status" id="status" role="alert"></div>
+        </form>
+
+        <div class="takk" id="takk" tabindex="-1">
+          <div class="stjerne" aria-hidden="true">⭐</div>
+          <h3>Takk, du er påmeldt!</h3>
+          <p>Vi gleder oss til å se deg på Slettelva Grendehus.</p>
+          <div class="oppsum" id="oppsum"></div>
+          <button class="knapp sekundar" type="button" id="kalender">Legg i kalenderen</button>
+          <p class="hjelp" style="margin-top:18px">Kan du likevel ikke komme? Gi beskjed til Motvind Troms, så får noen andre plassen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="kart" id="kart" aria-labelledby="kart-tittel">
+      <div>
+        <span class="over">Slik finner du fram</span>
+        <h2 id="kart-tittel">Slettaelva Grendehus på Kvaløya</h2>
+        <p class="adresse"><b>Karveslettvegen 51</b><br>9100 Kvaløysletta, Tromsø</p>
+        <a class="knapp kartknapp" href="https://www.google.com/maps/search/?api=1&amp;query=Slettaelva%20Grendehus%2C%20Karveslettvegen%2051%2C%209100%20Troms%C3%B8" target="_blank" rel="noopener">Åpne i Google Maps <span aria-hidden="true">↗</span></a>
+      </div>
+      <iframe title="Kart som viser Slettaelva Grendehus, Karveslettvegen 51 i Tromsø" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Karveslettvegen%2051%2C%209100%20Troms%C3%B8&amp;z=14&amp;output=embed"></iframe>
+    </section>
+  </div>
+</main>
+
+<button class="sang" id="sang" type="button" aria-label="Spill julesangen">
+  <span class="rund" id="sang-ikon" aria-hidden="true">🎵</span><span id="sang-tekst">Spill julesangen</span>
+</button>
+<audio id="lyd" src="julesang.mp3" preload="none" loop></audio>
+
+<footer>Motvind Troms · Julebord torsdag 10. desember 2026 fra kl. 18.00 · Slettelva Grendehus</footer>
+
+<script src="supabase-public.js"></script>
+<script>
+async function rpc(fn, body){
+  const r = await fetch(MV_SUPABASE.url + "/rest/v1/rpc/" + fn, {
+    method:"POST",
+    headers:{ "apikey":MV_SUPABASE.publishable, "Content-Type":"application/json" },
+    body: JSON.stringify(body || {})
+  });
+  if(!r.ok) throw new Error("HTTP " + r.status);
+  return r.json();
+}
+
+async function oppdaterTeller(){
+  try{
+    const s = await rpc("motvind_julebord_status");
+    const el = document.getElementById("teller");
+    if(s.kapasitet){
+      const igjen = Math.max(0, s.kapasitet - s.personer);
+      el.textContent = igjen > 0 ? igjen + " ledige plasser igjen" : "Alle plassene er tatt";
+      document.querySelector("#plasser > span:last-child").firstChild.textContent = "Kun " + s.kapasitet + " plasser";
+      if(igjen < s.kapasitet){
+        document.getElementById("plasser-igjen").textContent = igjen > 0 ? "Bare " + igjen + " ledige igjen. Meld deg på i dag!" : "Alle plassene er tatt";
+        document.getElementById("plass-skjema").textContent = igjen > 0 ? "Kun " + s.kapasitet + " plasser, " + igjen + " ledige igjen. Først til mølla!" : "Alle plassene er tatt.";
+      }
+    } else if(s.personer >= 10){
+      el.textContent = s.personer + " er påmeldt så langt";
+    }
+  }catch(e){}
+}
+oppdaterTeller();
+
+document.querySelectorAll('input[name=antall]').forEach(r => r.addEventListener("change", () => {
+  const medLedsager = document.querySelector('input[name=antall]:checked').value === "2";
+  document.getElementById("f-ledsager").classList.toggle("skjult", !medLedsager);
+  document.getElementById("f-ledsager-medlem").classList.toggle("skjult", !medLedsager);
+  if(!medLedsager) document.getElementById("ledsager_vil_bli_medlem").checked = false;
+}));
+
+const skjema = document.getElementById("skjema");
+const statusEl = document.getElementById("status");
+function feil(id, vis){ document.getElementById(id).classList.toggle("ugyldig", vis); return vis; }
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+skjema.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  statusEl.className = "status";
+  if(skjema.nettside.value) return; // robotfelle
+
+  const navn = skjema.navn.value.trim();
+  const tlf = skjema.telefon.value.replace(/[^0-9+]/g, "");
+  const epost = skjema.epost.value.trim();
+  let galt = false;
+  galt = feil("f-navn", navn.length < 2) || galt;
+  galt = feil("f-telefon", tlf.replace("+","").length < 8) || galt;
+  galt = feil("f-epost", epost !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(epost)) || galt;
+  galt = feil("f-samtykke", !document.getElementById("samtykke").checked) || galt;
+  if(galt){ const f = skjema.querySelector(".ugyldig input"); if(f) f.focus(); return; }
+
+  const ledsager = document.querySelector('input[name=antall]:checked').value === "2";
+  const knapp = document.getElementById("send");
+  knapp.disabled = true; knapp.textContent = "Sender ...";
+  try{
+    const svar = await rpc("motvind_julebord_meld_pa", {
+      p_navn:navn, p_telefon:tlf, p_epost:epost, p_bosted:skjema.bosted.value,
+      p_ledsager:ledsager, p_ledsager_navn: ledsager ? skjema.ledsager_navn.value : "",
+      p_matbehov:skjema.matbehov.value, p_hilsen:skjema.hilsen.value,
+      p_vil_bli_medlem: document.getElementById("vil_bli_medlem").checked,
+      p_ledsager_vil_bli_medlem: ledsager && document.getElementById("ledsager_vil_bli_medlem").checked
+    });
+    if(svar.ok){
+      const rad = (k,v) => '<div><span>'+k+'</span><b>'+v+'</b></div>';
+      document.getElementById("oppsum").innerHTML =
+        rad("Navn", esc(navn)) +
+        rad("Antall", ledsager ? "2 personer (ledsager betaler 50 kr i døra)" : "1 person") +
+        rad("Når", "Torsdag 10. desember kl. 18.00") +
+        rad("Hvor", "Slettaelva Grendehus, Karveslettvegen 51, Tromsø");
+      skjema.style.display = "none";
+      const t = document.getElementById("takk"); t.classList.add("vis"); t.focus();
+      oppdaterTeller();
+    } else {
+      statusEl.textContent = {
+        finnes:"Dette mobilnummeret er allerede påmeldt. Du trenger ikke melde deg på igjen.",
+        fullt:"Beklager, julebordet er fullt.",
+        navn:"Skriv navnet ditt.", telefon:"Skriv et gyldig mobilnummer."
+      }[svar.feil] || "Noe gikk galt. Prøv igjen.";
+      statusEl.className = "status vis";
+    }
+  }catch(err){
+    statusEl.textContent = "Vi fikk ikke kontakt. Sjekk nettet og prøv igjen.";
+    statusEl.className = "status vis";
+  }finally{
+    knapp.disabled = false; knapp.textContent = "Send påmelding";
+  }
+});
+
+document.getElementById("kalender").addEventListener("click", () => {
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Motvind Troms//Julebord//NO","BEGIN:VEVENT",
+    "UID:julebord-2026@motvind-troms","DTSTAMP:20261118T120000Z",
+    "DTSTART;TZID=Europe/Oslo:20261210T180000",
+    "SUMMARY:Julebord Motvind Troms","LOCATION:Slettaelva Grendehus\\, Karveslettvegen 51\\, 9100 Tromsø",
+    "DESCRIPTION:Julebord\\, skjemt og alvor med «Någgå' attåt'». Gratis for medlemmer. Ledsager betaler 50 kr i døra.",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], {type:"text/calendar"}));
+  a.download = "julebord-motvind-troms.ics"; a.click();
+});
+
+// Bidos: ekte foto (bidos.jpg i samme mappe) brukes når det finnes, ellers en tegnet, dampende gryte.
+(function(){
+  const b = document.getElementById("bidos-bilde"), foto = new Image();
+  foto.onload = () => { b.classList.remove("tegnet"); b.innerHTML = ""; b.style.backgroundImage = "url(bidos.jpg)"; };
+  b.classList.add("tegnet");
+  b.innerHTML = '<span class="gryte" aria-hidden="true">🍲<span class="damp"><i></i><i></i><i></i></span></span>';
+  foto.src = "bidos.jpg";
+})();
+
+// Vertsnissen: bildet gaute.png legges i samme mappe. Finnes det ikke, vises ingenting.
+(function(){
+  const lue = '<svg viewBox="0 0 120 90" aria-hidden="true"><path d="M14 70 C30 20 70 0 104 14 C92 22 86 34 86 50 Z" fill="#c62f27"/><path d="M14 70 C30 20 70 0 104 14 C96 18 90 24 88 32 C70 22 40 34 28 70 Z" fill="#a8241d"/><rect x="4" y="62" width="100" height="22" rx="11" fill="#fff"/><circle cx="106" cy="16" r="11" fill="#fff"/></svg>';
+  const test = new Image();
+  test.onload = () => {
+    document.querySelectorAll(".nissehode").forEach(el => {
+      el.innerHTML = '<img src="gaute.png" alt="">' + lue; el.hidden = false;
+    });
+    const v = document.getElementById("vert-hode");
+    v.querySelector("img").alt = "Vertsnissen Gaute Grøtta Grav";
+    document.getElementById("vert-ikon").remove();
+  };
+  test.src = "gaute.png";
+})();
+
+// Julesangen: forsøker å starte 3 sekunder etter at siden åpnes.
+// Nettlesere tillater ikke lyd før besøkende har trykket på siden, så da starter den ved første trykk.
+(function(){
+  const lyd = document.getElementById("lyd"), knapp = document.getElementById("sang"),
+        ikon = document.getElementById("sang-ikon"), tekst = document.getElementById("sang-tekst");
+  let stoppetAvBruker = false;
+  lyd.addEventListener("play", () => document.getElementById("mic").classList.add("danser"));
+  lyd.addEventListener("pause", () => document.getElementById("mic").classList.remove("danser"));
+  function vis(spiller){
+    ikon.textContent = spiller ? "❚❚" : "🎵";
+    tekst.textContent = spiller ? "Pause" : "Spill julesangen";
+    knapp.setAttribute("aria-label", spiller ? "Sett julesangen på pause" : "Spill julesangen");
+    knapp.classList.toggle("pulser", !spiller);
+  }
+  function spill(){ lyd.volume = .55; return lyd.play().then(() => vis(true)); }
+  knapp.onclick = (e) => { e.stopPropagation();
+    if(lyd.paused){ stoppetAvBruker = false; spill().catch(()=>{}); } else { stoppetAvBruker = true; lyd.pause(); vis(false); } };
+  fetch("julesang.mp3", {method:"HEAD"}).then(r => {
+    if(!r.ok) return;
+    knapp.classList.add("vis"); vis(false);
+    setTimeout(() => {
+      spill().catch(() => {
+        const forsteTrykk = () => { if(!stoppetAvBruker && lyd.paused) spill().catch(()=>{}); };
+        ["pointerdown","keydown","touchstart"].forEach(t => addEventListener(t, forsteTrykk, {once:true, capture:true}));
+      });
+    }, 3000);
+  }).catch(()=>{});
+})();
+
+(function(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const c = document.getElementById("sno"), x = c.getContext("2d");
+  let w, h, fl = [];
+  function str(){ w = c.width = c.offsetWidth; h = c.height = c.offsetHeight;
+    fl = Array.from({length: Math.round(w/14)}, () => ({x:Math.random()*w, y:Math.random()*h, r:Math.random()*2.2+.6, s:Math.random()*.5+.25, d:Math.random()*Math.PI*2})); }
+  str(); addEventListener("resize", str);
+  (function tegn(){
+    x.clearRect(0,0,w,h); x.fillStyle = "rgba(255,255,255,.75)";
+    for(const f of fl){ f.y += f.s; f.d += .01; f.x += Math.sin(f.d)*.3;
+      if(f.y > h){ f.y = -5; f.x = Math.random()*w; }
+      x.beginPath(); x.arc(f.x, f.y, f.r, 0, Math.PI*2); x.fill(); }
+    requestAnimationFrame(tegn);
+  })();
+})();
+</script>
+</body>
+</html>
