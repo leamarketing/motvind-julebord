@@ -147,16 +147,30 @@ async function hent(){
 
 document.getElementById("logg").addEventListener("submit", async e => {
   e.preventDefault();
-  kode = document.getElementById("kode").value.trim();
+  apne(document.getElementById("kode").value.trim());
+});
+
+// Styrelenken har nøkkelen etter # (sendes aldri til noen server). Da åpnes lista direkte, uten kodeboks.
+async function apne(k){
+  kode = k;
   const f = document.getElementById("loggfeil"); f.textContent = "";
   try{
     if(await hent()){
       document.getElementById("logg").hidden = true;
       document.getElementById("innhold").hidden = false;
       setInterval(() => hent().catch(()=>{}), 60000);
-    } else f.textContent = "Feil kode.";
+      return true;
+    }
+    f.textContent = "Feil kode.";
   }catch(err){ f.textContent = "Fikk ikke kontakt. Prøv igjen."; }
-});
+  document.getElementById("logg").hidden = false;
+  return false;
+}
+const lenkeKode = decodeURIComponent(location.hash.slice(1)).trim();
+if(lenkeKode){
+  document.getElementById("logg").hidden = true;
+  apne(lenkeKode);
+}
 document.getElementById("hent").onclick = () => hent();
 
 document.getElementById("rader").addEventListener("click", async e => {
