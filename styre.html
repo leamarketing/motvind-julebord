@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Påmeldte julebord</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--natt:#0d1f1a;--gran:#1d4a3c;--gull:#e8b04b;--rod:#b8322b;--sno:#fbf8f1;--papir:#fffdf8;--blekk:#1b2420;--dempet:#55625c;--linje:#dcd6c8;--feil:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sno);color:var(--blekk);font:15px/1.5 Inter,system-ui,sans-serif}
+header{background:var(--natt);color:#fff;padding:22px 16px}
+header .inn,main{max-width:1180px;margin:0 auto}
+h1{font-family:Fraunces,Georgia,serif;margin:0;font-size:1.6rem}
+header p{margin:4px 0 0;color:#c5d3cc}
+main{padding:24px 16px 60px}
+.kort{background:var(--papir);border:1px solid var(--linje);border-radius:16px;padding:20px}
+.logg{max-width:420px;margin:40px auto}
+label{display:block;font-weight:600;margin-bottom:6px}
+input{font:inherit;font-size:1.05rem;padding:12px 14px;border:1.5px solid #8f8778;border-radius:10px;width:100%;background:#fff}
+button{font:600 .98rem Inter,sans-serif;border:0;border-radius:999px;padding:12px 22px;cursor:pointer;background:var(--rod);color:#fff}
+button.lys{background:#fff;color:var(--gran);border:1.5px solid var(--gran)}
+button.mini{padding:6px 12px;font-size:.85rem;background:#fff;color:var(--feil);border:1px solid #e3b3ae}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gull);outline-offset:2px}
+.feil{color:var(--feil);margin-top:10px;min-height:1.4em}
+.tall{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.tall .nye{background:#fff4e0;border-color:var(--gull)}
+.ny{display:inline-block;background:var(--gull);color:var(--natt);border-radius:6px;padding:1px 7px;font-size:.8rem;font-weight:700;margin:2px 0}
+.mat.medlem li{border-left-color:var(--gran)}
+.tall div{background:var(--papir);border:1px solid var(--linje);border-radius:14px;padding:16px}
+.tall b{display:block;font-family:Fraunces,Georgia,serif;font-size:2.2rem;line-height:1.1;color:var(--natt)}
+.tall span{color:var(--dempet);font-size:.88rem}
+.tall .hoved{background:var(--gran);border-color:var(--gran)}
+.tall .hoved b,.tall .hoved span{color:#fff}
+.verktoy{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:18px}
+.verktoy .kap{display:flex;gap:8px;align-items:end;margin-left:auto}
+.verktoy .kap input{width:110px}
+.tabell{overflow-x:auto;background:var(--papir);border:1px solid var(--linje);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:900px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linje);vertical-align:top}
+th{background:#f1ece0;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dempet)}
+tr:last-child td{border-bottom:0}
+.merk{display:inline-block;background:#fff4e0;border-radius:6px;padding:1px 7px;font-size:.85rem}
+h2{font-family:Fraunces,Georgia,serif;font-size:1.25rem;margin:28px 0 10px}
+.mat{list-style:none;padding:0;margin:0}
+.mat li{background:var(--papir);border:1px solid var(--linje);border-left:4px solid var(--gull);border-radius:10px;padding:10px 14px;margin-bottom:8px}
+.oppdatert{color:var(--dempet);font-size:.85rem;margin-top:10px}
+@media (max-width:720px){.tall{grid-template-columns:1fr 1fr}.tall .hoved{grid-column:1/-1}.verktoy .kap{margin-left:0}}
+@media print{header,.verktoy,.logg,button.mini{display:none!important}body{background:#fff}table{min-width:0;font-size:11px}}
+</style>
+</head>
+<body>
+<header><div class="inn">
+  <h1>Julebord Motvind Troms: påmeldte</h1>
+  <p>Torsdag 10. desember 2026 fra kl. 18.00 · Slettelva Grendehus</p>
+</div></header>
+
+<main>
+  <form class="kort logg" id="logg">
+    <label for="kode">Arrangørkode</label>
+    <input id="kode" autocomplete="off" autocapitalize="characters" required>
+    <p class="feil" id="loggfeil" role="alert"></p>
+    <button type="submit">Vis påmeldte</button>
+  </form>
+
+  <section id="innhold" hidden>
+    <div class="tall">
+      <div class="hoved"><b id="t-personer">0</b><span>personer totalt (mat til)</span></div>
+      <div><b id="t-medlem">0</b><span>medlemmer (gratis)</span></div>
+      <div><b id="t-ledsager">0</b><span>ledsagere (50 kr i døra)</span></div>
+      <div class="nye"><b id="t-nye">0</b><span>vil bli medlem</span></div>
+      <div><b id="t-kap">Ingen grense</b><span>maks antall plasser</span></div>
+    </div>
+
+    <div class="verktoy">
+      <button type="button" class="lys" id="hent">Oppdater nå</button>
+      <button type="button" class="lys" id="csv">Last ned til Excel</button>
+      <button type="button" class="lys" onclick="print()">Skriv ut dørliste</button>
+      <div class="kap">
+        <div><label for="kapasitet">Maks plasser</label><input id="kapasitet" type="number" min="0" placeholder="Ingen"></div>
+        <button type="button" id="lagrekap">Lagre</button>
+      </div>
+    </div>
+
+    <div class="tabell"><table>
+      <thead><tr><th>#</th><th>Navn</th><th>Mobil</th><th>E-post</th><th>Fra</th><th>Ledsager</th><th>Vil bli medlem</th><th>Mat</th><th>Hilsen</th><th>Påmeldt</th><th></th></tr></thead>
+      <tbody id="rader"></tbody>
+    </table></div>
+    <p class="oppdatert" id="oppdatert"></p>
+
+    <h2>Vil bli medlem i Motvind</h2>
+    <ul class="mat medlem" id="nye"></ul>
+
+    <h2>Allergier og hensyn til maten</h2>
+    <ul class="mat" id="mat"></ul>
+  </section>
+</main>
+
+<script src="supabase-public.js"></script>
+<script>
+let kode = "", data = [];
+async function rpc(fn, body){
+  const r = await fetch(MV_SUPABASE.url + "/rest/v1/rpc/" + fn, {method:"POST",
+    headers:{apikey:MV_SUPABASE.publishable,"Content-Type":"application/json"}, body:JSON.stringify(body||{})});
+  if(!r.ok) throw new Error("HTTP " + r.status);
+  return r.json();
+}
+const esc = s => (s ?? "").toString().replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const tid = t => new Date(t).toLocaleString("nb-NO",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+
+async function hent(){
+  const s = await rpc("motvind_julebord_liste", {p_kode:kode});
+  if(!s.ok) return false;
+  data = s.rader;
+  const led = data.filter(r => r.ledsager).length;
+  document.getElementById("t-personer").textContent = data.length + led;
+  document.getElementById("t-medlem").textContent = data.length;
+  document.getElementById("t-ledsager").textContent = led;
+  document.getElementById("t-kap").textContent = s.kapasitet || "Ingen grense";
+  const nye = [];
+  data.forEach(r => {
+    if(r.vil_bli_medlem) nye.push({navn:r.navn, kontakt:r.telefon + (r.epost ? " · " + r.epost : ""), via:""});
+    if(r.ledsager_vil_bli_medlem) nye.push({navn:r.ledsager_navn || "Ledsager (navn ikke oppgitt)", kontakt:"Ta kontakt via " + r.navn + ", " + r.telefon, via:" (ledsager)"});
+  });
+  document.getElementById("t-nye").textContent = nye.length;
+  document.getElementById("nye").innerHTML = nye.length
+    ? nye.map(n => `<li><b>${esc(n.navn)}</b>${esc(n.via)}: ${esc(n.kontakt)}</li>`).join("")
+    : "<li>Ingen har bedt om medlemskap ennå.</li>";
+  document.getElementById("kapasitet").value = s.kapasitet || "";
+  document.getElementById("rader").innerHTML = data.map((r,i) => `<tr>
+    <td>${i+1}</td><td><b>${esc(r.navn)}</b></td><td>${esc(r.telefon)}</td><td>${esc(r.epost)}</td><td>${esc(r.bosted)}</td>
+    <td>${r.ledsager ? '<span class="merk">+1 ' + esc(r.ledsager_navn) + '</span>' : ''}</td>
+    <td>${r.vil_bli_medlem ? '<span class="ny">Selv</span><br>' : ''}${r.ledsager_vil_bli_medlem ? '<span class="ny">Ledsager</span>' : ''}</td>
+    <td>${esc(r.matbehov)}</td><td>${esc(r.hilsen)}</td><td>${tid(r.opprettet)}</td>
+    <td><button class="mini" data-id="${r.id}" data-navn="${esc(r.navn)}">Slett</button></td></tr>`).join("")
+    || '<tr><td colspan="11">Ingen påmeldte ennå.</td></tr>';
+  const mat = data.filter(r => r.matbehov);
+  document.getElementById("mat").innerHTML = mat.length
+    ? mat.map(r => `<li><b>${esc(r.navn)}${r.ledsager ? " (+1)" : ""}:</b> ${esc(r.matbehov)}</li>`).join("")
+    : "<li>Ingen har meldt inn allergier eller hensyn.</li>";
+  document.getElementById("oppdatert").textContent = "Sist oppdatert " + new Date().toLocaleTimeString("nb-NO") + ". Oppdateres av seg selv hvert minutt.";
+  return true;
+}
+
+document.getElementById("logg").addEventListener("submit", async e => {
+  e.preventDefault();
+  apne(document.getElementById("kode").value.trim());
+});
+
+// Styrelenken har nøkkelen etter # (sendes aldri til noen server). Da åpnes lista direkte, uten kodeboks.
+async function apne(k){
+  kode = k;
+  const f = document.getElementById("loggfeil"); f.textContent = "";
+  try{
+    if(await hent()){
+      document.getElementById("logg").hidden = true;
+      document.getElementById("innhold").hidden = false;
+      setInterval(() => hent().catch(()=>{}), 60000);
+      return true;
+    }
+    f.textContent = "Feil kode.";
+  }catch(err){ f.textContent = "Fikk ikke kontakt. Prøv igjen."; }
+  document.getElementById("logg").hidden = false;
+  return false;
+}
+const lenkeKode = decodeURIComponent(location.hash.slice(1)).trim();
+if(lenkeKode){
+  document.getElementById("logg").hidden = true;
+  apne(lenkeKode);
+}
+document.getElementById("hent").onclick = () => hent();
+
+document.getElementById("rader").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-id]"); if(!b) return;
+  if(!confirm("Slette påmeldingen til " + b.dataset.navn + "? Dette kan ikke angres.")) return;
+  await rpc("motvind_julebord_slett", {p_kode:kode, p_id:Number(b.dataset.id)});
+  hent();
+});
+
+document.getElementById("lagrekap").onclick = async () => {
+  const v = parseInt(document.getElementById("kapasitet").value || "0", 10);
+  await rpc("motvind_julebord_sett_kapasitet", {p_kode:kode, p_kapasitet:v});
+  hent();
+};
+
+document.getElementById("csv").onclick = () => {
+  const q = v => '"' + (v ?? "").toString().replace(/"/g,'""') + '"';
+  const hode = ["Nr","Navn","Mobil","E-post","Fra","Ledsager","Ledsagers navn","Vil bli medlem","Ledsager vil bli medlem","Mat","Hilsen","Påmeldt"];
+  const linjer = data.map((r,i) => [i+1,r.navn,r.telefon,r.epost,r.bosted,r.ledsager?"Ja":"Nei",r.ledsager_navn,r.vil_bli_medlem?"Ja":"Nei",r.ledsager_vil_bli_medlem?"Ja":"Nei",r.matbehov,r.hilsen,tid(r.opprettet)].map(q).join(";"));
+  const blob = new Blob(["﻿" + [hode.map(q).join(";"), ...linjer].join("\r\n")], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "julebord-motvind-troms-pameldte.csv"; a.click();
+};
+</script>
+</body>
+</html>
