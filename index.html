@@ -564,8 +564,8 @@ document.getElementById("kalender").addEventListener("click", () => {
   const lyd = document.getElementById("lyd"), knapp = document.getElementById("sang"),
         ikon = document.getElementById("sang-ikon"), tekst = document.getElementById("sang-tekst");
   let stoppetAvBruker = false;
-  lyd.addEventListener("play", () => document.getElementById("mic").classList.add("danser"));
-  lyd.addEventListener("pause", () => document.getElementById("mic").classList.remove("danser"));
+  lyd.addEventListener("play", () => { document.getElementById("mic").classList.add("danser"); vis(true); });
+  lyd.addEventListener("pause", () => { document.getElementById("mic").classList.remove("danser"); vis(false); });
   function vis(spiller){
     ikon.textContent = spiller ? "❚❚" : "🎵";
     tekst.textContent = spiller ? "Pause" : "Spill julesangen";
