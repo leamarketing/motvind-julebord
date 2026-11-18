@@ -307,7 +307,6 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
     </div>
     <div class="vert">
       <div class="ikon glimt" id="vert-ikon" aria-hidden="true">🎅</div>
-      <div class="nissehode" id="vert-hode" hidden></div>
       <p>Kvelden ledes av <b>«vertsnissen med julepuls»</b>, Gaute Grøtta Grav.</p>
     </div>
     <div class="banner gronn"><span>Lukket arrangement. Begrenset plass. Påmelding!</span></div>
@@ -556,9 +555,6 @@ document.getElementById("kalender").addEventListener("click", () => {
     document.querySelectorAll(".nissehode").forEach(el => {
       el.innerHTML = '<img src="gaute.png" alt="">'; el.hidden = false;
     });
-    const v = document.getElementById("vert-hode");
-    v.querySelector("img").alt = "Vertsnissen Gaute Grøtta Grav";
-    document.getElementById("vert-ikon").remove();
   };
   test.src = "gaute.png";
 })();
