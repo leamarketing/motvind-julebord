@@ -402,18 +402,12 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
             <p class="hjelp">Vi har en rimelig hotellavtale! Kryss av, så kontakter vi deg.</p>
           </fieldset>
 
-          <fieldset class="felt medlemskap">
-            <legend class="etikett">Ønsker å bli medlem i Motvind? <span class="valgfri">(valgfritt)</span></legend>
-            <label class="avkryss"><input type="checkbox" id="vil_bli_medlem"><span>Jeg er ikke medlem ennå, men vil gjerne bli det</span></label>
-            <label class="avkryss skjult" id="f-ledsager-medlem"><input type="checkbox" id="ledsager_vil_bli_medlem"><span>Ledsageren min vil gjerne bli medlem</span></label>
-            <p class="hjelp">Motvind Troms tar kontakt med deg om medlemskap.</p>
-          </fieldset>
 
           <div class="hp" aria-hidden="true"><label for="nettside">La stå tomt</label><input type="text" id="nettside" name="nettside" tabindex="-1" autocomplete="off"></div>
 
           <div class="felt" id="f-samtykke" style="margin-bottom:0">
             <label class="samtykke"><input type="checkbox" id="samtykke" required>
-              <span>Jeg er medlem i Motvind eller har krysset av for å bli det, og jeg godtar at Motvind Troms bruker opplysningene til å planlegge julebordet og til å ta kontakt om hotell eller medlemskap hvis jeg har bedt om det. Opplysningene slettes etter arrangementet.</span></label>
+              <span>Jeg er medlem i Motvind eller melder meg inn via lenken over, og jeg godtar at Motvind Troms bruker opplysningene til å planlegge julebordet og til å ta kontakt om hotell hvis jeg har bedt om det. Opplysningene slettes etter arrangementet.</span></label>
             <p class="feilmelding" style="margin-top:-14px;margin-bottom:14px">Kryss av for å fullføre påmeldingen.</p>
           </div>
 
@@ -492,8 +486,6 @@ oppdaterTeller();
 document.querySelectorAll('input[name=antall]').forEach(r => r.addEventListener("change", () => {
   const medLedsager = document.querySelector('input[name=antall]:checked').value === "2";
   document.getElementById("f-ledsager").classList.toggle("skjult", !medLedsager);
-  document.getElementById("f-ledsager-medlem").classList.toggle("skjult", !medLedsager);
-  if(!medLedsager) document.getElementById("ledsager_vil_bli_medlem").checked = false;
 }));
 
 const skjema = document.getElementById("skjema");
@@ -524,8 +516,8 @@ skjema.addEventListener("submit", async (e) => {
       p_navn:navn, p_telefon:tlf, p_epost:epost, p_bosted:skjema.bosted.value,
       p_ledsager:ledsager, p_ledsager_navn: ledsager ? skjema.ledsager_navn.value : "",
       p_matbehov:"", p_hilsen:skjema.hilsen.value,
-      p_vil_bli_medlem: document.getElementById("vil_bli_medlem").checked,
-      p_ledsager_vil_bli_medlem: ledsager && document.getElementById("ledsager_vil_bli_medlem").checked,
+      p_vil_bli_medlem: false,
+      p_ledsager_vil_bli_medlem: false,
       p_trenger_hotell: document.getElementById("trenger_hotell").checked
     });
     if(svar.ok){
