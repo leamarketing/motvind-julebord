@@ -97,6 +97,20 @@ textarea{min-height:84px;resize:vertical}
 .skjult{display:none!important}
 .medlemskap{border:1.5px dashed var(--gull);border-radius:14px;padding:14px 16px 10px;background:#fff9ec}
 .medlemskap legend{padding:0 6px}
+.bli-medlem{border:2px solid var(--rod);border-radius:14px;padding:16px 18px;background:#fff1ef}
+.bli-medlem p{margin:0 0 10px}
+.bli-medlem-tittel{font:800 1.1rem Inter,sans-serif;color:var(--rod)}
+.bli-medlem .bli-medlem-knapp{width:auto;font-size:.98rem;padding:12px 22px}
+.kvittering-merke{display:inline-block;margin:10px 0 0;font-weight:700;color:var(--gran);letter-spacing:.04em}
+.takk-knapper{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+@media print{
+  body{background:#fff}
+  body *{visibility:hidden!important;animation:none!important}
+  #takk,#takk *{visibility:visible!important}
+  #takk{position:absolute;left:0;top:0;width:100%;box-shadow:none;border:1px solid #999}
+  #takk .takk-knapper,#takk .hjelp{display:none!important}
+  .sang,#sno,.lysrekke{display:none!important}
+}
 .hotell{border:1.5px dashed var(--gran);border-radius:14px;padding:14px 16px 10px;background:#eef6f1}
 .hotell legend{padding:0 6px}
 .avkryss{display:flex;gap:12px;align-items:flex-start;font-weight:500;margin:6px 0 8px;cursor:pointer}
@@ -368,9 +382,10 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
             <input type="text" id="ledsager_navn" name="ledsager_navn" maxlength="120">
           </div>
 
-          <div class="felt">
-            <label for="matbehov">Allergier eller hensyn til maten? <span class="valgfri">(valgfritt)</span></label>
-            <textarea id="matbehov" name="matbehov" maxlength="500" placeholder="Gjelder både deg og en eventuell ledsager"></textarea>
+          <div class="felt bli-medlem">
+            <p class="bli-medlem-tittel">⭐ Bli medlem NÅ og få alle fordeler!</p>
+            <p>Gratis julebord og medlemskap ut 2027 for <b>kr 290,-</b><br>Eventuelt familiemedlemskap på samme adresse for <b>kr 450,-</b></p>
+            <a class="knapp bli-medlem-knapp" href="https://www.motvind.org/bli-medlem" target="_blank" rel="noopener">Bli medlem på motvind.org <span aria-hidden="true">↗</span></a>
           </div>
           <div class="felt">
             <label for="hilsen">Hilsen til arrangørene <span class="valgfri">(valgfritt)</span></label>
@@ -406,8 +421,13 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
           <div class="stjerne" aria-hidden="true">⭐</div>
           <h3>Takk, du er påmeldt!</h3>
           <p>Vi gleder oss til å se deg på Slettelva Grendehus.</p>
+          <p class="kvittering-merke">🧾 Kvittering for påmelding</p>
           <div class="oppsum" id="oppsum"></div>
-          <button class="knapp sekundar" type="button" id="kalender">Legg i kalenderen</button>
+          <div class="takk-knapper">
+            <button class="knapp sekundar" type="button" id="kvittering">Lagre kvittering</button>
+            <button class="knapp sekundar" type="button" id="kalender">Legg i kalenderen</button>
+          </div>
+          <p class="hjelp">Lagre kvitteringen som PDF, eller ta et skjermbilde på mobilen.</p>
           <p class="hjelp" style="margin-top:18px">Kan du likevel ikke komme? Gi beskjed til Motvind Troms, så får noen andre plassen.</p>
         </div>
       </div>
@@ -498,15 +518,19 @@ skjema.addEventListener("submit", async (e) => {
     const svar = await rpc("motvind_julebord_meld_pa", {
       p_navn:navn, p_telefon:tlf, p_epost:epost, p_bosted:skjema.bosted.value,
       p_ledsager:ledsager, p_ledsager_navn: ledsager ? skjema.ledsager_navn.value : "",
-      p_matbehov:skjema.matbehov.value, p_hilsen:skjema.hilsen.value,
+      p_matbehov:"", p_hilsen:skjema.hilsen.value,
       p_vil_bli_medlem: document.getElementById("vil_bli_medlem").checked,
       p_ledsager_vil_bli_medlem: ledsager && document.getElementById("ledsager_vil_bli_medlem").checked,
       p_trenger_hotell: document.getElementById("trenger_hotell").checked
     });
     if(svar.ok){
       const rad = (k,v) => '<div><span>'+k+'</span><b>'+v+'</b></div>';
+      const naa = new Date().toLocaleString("nb-NO",{day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"});
       document.getElementById("oppsum").innerHTML =
+        rad("Påmeldingsnummer", "#" + esc(String(svar.nr))) +
+        rad("Påmeldt", naa) +
         rad("Navn", esc(navn)) +
+        rad("Mobil", esc(tlf)) +
         rad("Antall", ledsager ? "2 personer (ledsager betaler 50 kr i døra)" : "1 person") +
         rad("Når", "Torsdag 10. desember kl. 18.00") +
         rad("Hvor", "Slettaelva Grendehus, Karveslettvegen 51, Tromsø");
@@ -527,6 +551,11 @@ skjema.addEventListener("submit", async (e) => {
   }finally{
     knapp.disabled = false; knapp.textContent = "Send påmelding";
   }
+});
+
+document.getElementById("kvittering").addEventListener("click", () => {
+  document.getElementById("lyd").pause();
+  window.print();
 });
 
 document.getElementById("kalender").addEventListener("click", () => {
