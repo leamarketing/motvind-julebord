@@ -102,6 +102,7 @@ textarea{min-height:84px;resize:vertical}
 .bli-medlem-tittel{font:800 1.1rem Inter,sans-serif;color:var(--rod)}
 .bli-medlem .bli-medlem-knapp{width:auto;font-size:.98rem;padding:12px 22px}
 .kvittering-merke{display:inline-block;margin:10px 0 0;font-weight:700;color:var(--gran);letter-spacing:.04em}
+.epost-status{margin:0 0 14px;font-weight:600;color:var(--gran);min-height:1.2em}
 .takk-knapper{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 @media print{
   body{background:#fff}
@@ -362,6 +363,7 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
             <div class="felt" id="f-epost">
               <label for="epost">E-post <span class="valgfri">(valgfritt)</span></label>
               <input type="email" id="epost" name="epost" autocomplete="email" maxlength="160">
+              <p class="hjelp">Få kvittering på e-post.</p>
               <p class="feilmelding">E-postadressen ser ikke riktig ut.</p>
             </div>
           </div>
@@ -423,6 +425,7 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
           <p>Vi gleder oss til å se deg på Slettelva Grendehus.</p>
           <p class="kvittering-merke">🧾 Kvittering for påmelding</p>
           <div class="oppsum" id="oppsum"></div>
+          <p class="epost-status" id="epost-status" aria-live="polite"></p>
           <div class="takk-knapper">
             <button class="knapp sekundar" type="button" id="kvittering">Lagre kvittering</button>
             <button class="knapp sekundar" type="button" id="kalender">Legg i kalenderen</button>
@@ -537,6 +540,16 @@ skjema.addEventListener("submit", async (e) => {
       skjema.style.display = "none";
       const t = document.getElementById("takk"); t.classList.add("vis"); t.focus();
       oppdaterTeller();
+      if(epost){
+        const es = document.getElementById("epost-status");
+        es.textContent = "Sender kvittering til " + epost + " ...";
+        fetch(MV_SUPABASE.url + "/functions/v1/motvind-julebord-kvittering", {
+          method:"POST", headers:{ "Content-Type":"application/json", "apikey":MV_SUPABASE.publishable },
+          body: JSON.stringify({ nr: svar.nr })
+        }).then(r => r.json()).then(k => {
+          es.textContent = k.ok ? "📧 Kvitteringen er sendt til " + epost + ". Sjekk søppelpost hvis du ikke ser den." : "";
+        }).catch(() => { es.textContent = ""; });
+      }
     } else {
       statusEl.textContent = {
         finnes:"Dette mobilnummeret er allerede påmeldt. Du trenger ikke melde deg på igjen.",
