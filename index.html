@@ -97,6 +97,8 @@ textarea{min-height:84px;resize:vertical}
 .skjult{display:none!important}
 .medlemskap{border:1.5px dashed var(--gull);border-radius:14px;padding:14px 16px 10px;background:#fff9ec}
 .medlemskap legend{padding:0 6px}
+.hotell{border:1.5px dashed var(--gran);border-radius:14px;padding:14px 16px 10px;background:#eef6f1}
+.hotell legend{padding:0 6px}
 .avkryss{display:flex;gap:12px;align-items:flex-start;font-weight:500;margin:6px 0 8px;cursor:pointer}
 .avkryss input{width:22px;height:22px;margin-top:2px;flex:0 0 auto;accent-color:var(--gran)}
 .samtykke{display:flex;gap:12px;align-items:flex-start;font-weight:400;font-size:.93rem;color:var(--dempet);margin:6px 0 20px}
@@ -373,6 +375,12 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
             <textarea id="hilsen" name="hilsen" maxlength="500"></textarea>
           </div>
 
+          <fieldset class="felt hotell">
+            <legend class="etikett">🏨 Trenger du hotell? <span class="valgfri">(valgfritt)</span></legend>
+            <label class="avkryss"><input type="checkbox" id="trenger_hotell"><span>Ja, jeg vil gjerne høre om den rimelige hotellavtalen</span></label>
+            <p class="hjelp">Vi har en rimelig hotellavtale! Kryss av, så kontakter vi deg.</p>
+          </fieldset>
+
           <fieldset class="felt medlemskap">
             <legend class="etikett">Ønsker å bli medlem i Motvind? <span class="valgfri">(valgfritt)</span></legend>
             <label class="avkryss"><input type="checkbox" id="vil_bli_medlem"><span>Jeg er ikke medlem ennå, men vil gjerne bli det</span></label>
@@ -384,7 +392,7 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
 
           <div class="felt" id="f-samtykke" style="margin-bottom:0">
             <label class="samtykke"><input type="checkbox" id="samtykke" required>
-              <span>Jeg er medlem i Motvind eller har krysset av for å bli det, og jeg godtar at Motvind Troms bruker opplysningene til å planlegge julebordet og til å ta kontakt om medlemskap hvis jeg har bedt om det. Opplysningene slettes etter arrangementet.</span></label>
+              <span>Jeg er medlem i Motvind eller har krysset av for å bli det, og jeg godtar at Motvind Troms bruker opplysningene til å planlegge julebordet og til å ta kontakt om hotell eller medlemskap hvis jeg har bedt om det. Opplysningene slettes etter arrangementet.</span></label>
             <p class="feilmelding" style="margin-top:-14px;margin-bottom:14px">Kryss av for å fullføre påmeldingen.</p>
           </div>
 
@@ -490,7 +498,8 @@ skjema.addEventListener("submit", async (e) => {
       p_ledsager:ledsager, p_ledsager_navn: ledsager ? skjema.ledsager_navn.value : "",
       p_matbehov:skjema.matbehov.value, p_hilsen:skjema.hilsen.value,
       p_vil_bli_medlem: document.getElementById("vil_bli_medlem").checked,
-      p_ledsager_vil_bli_medlem: ledsager && document.getElementById("ledsager_vil_bli_medlem").checked
+      p_ledsager_vil_bli_medlem: ledsager && document.getElementById("ledsager_vil_bli_medlem").checked,
+      p_trenger_hotell: document.getElementById("trenger_hotell").checked
     });
     if(svar.ok){
       const rad = (k,v) => '<div><span>'+k+'</span><b>'+v+'</b></div>';
