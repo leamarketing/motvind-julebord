@@ -26,8 +26,10 @@ button.lys{background:#fff;color:var(--gran);border:1.5px solid var(--gran)}
 button.mini{padding:6px 12px;font-size:.85rem;background:#fff;color:var(--feil);border:1px solid #e3b3ae}
 button:focus-visible,input:focus-visible{outline:3px solid var(--gull);outline-offset:2px}
 .feil{color:var(--feil);margin-top:10px;min-height:1.4em}
-.tall{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.tall{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px}
 .tall .nye{background:#fff4e0;border-color:var(--gull)}
+.tall .hot{background:#eef6f1;border-color:var(--gran)}
+.mat.hotell li{border-left-color:#3b82a0}
 .ny{display:inline-block;background:var(--gull);color:var(--natt);border-radius:6px;padding:1px 7px;font-size:.8rem;font-weight:700;margin:2px 0}
 .mat.medlem li{border-left-color:var(--gran)}
 .tall div{background:var(--papir);border:1px solid var(--linje);border-radius:14px;padding:16px}
@@ -72,6 +74,7 @@ h2{font-family:Fraunces,Georgia,serif;font-size:1.25rem;margin:28px 0 10px}
       <div><b id="t-medlem">0</b><span>medlemmer (gratis)</span></div>
       <div><b id="t-ledsager">0</b><span>ledsagere (50 kr i døra)</span></div>
       <div class="nye"><b id="t-nye">0</b><span>vil bli medlem</span></div>
+      <div class="hot"><b id="t-hotell">0</b><span>trenger hotell</span></div>
       <div><b id="t-kap">Ingen grense</b><span>maks antall plasser</span></div>
     </div>
 
@@ -86,10 +89,13 @@ h2{font-family:Fraunces,Georgia,serif;font-size:1.25rem;margin:28px 0 10px}
     </div>
 
     <div class="tabell"><table>
-      <thead><tr><th>#</th><th>Navn</th><th>Mobil</th><th>E-post</th><th>Fra</th><th>Ledsager</th><th>Vil bli medlem</th><th>Mat</th><th>Hilsen</th><th>Påmeldt</th><th></th></tr></thead>
+      <thead><tr><th>#</th><th>Navn</th><th>Mobil</th><th>E-post</th><th>Fra</th><th>Ledsager</th><th>Hotell</th><th>Vil bli medlem</th><th>Mat</th><th>Hilsen</th><th>Påmeldt</th><th></th></tr></thead>
       <tbody id="rader"></tbody>
     </table></div>
     <p class="oppdatert" id="oppdatert"></p>
+
+    <h2>Trenger hotell</h2>
+    <ul class="mat hotell" id="hotell"></ul>
 
     <h2>Vil bli medlem i Motvind</h2>
     <ul class="mat medlem" id="nye"></ul>
@@ -125,6 +131,11 @@ async function hent(){
     if(r.vil_bli_medlem) nye.push({navn:r.navn, kontakt:r.telefon + (r.epost ? " · " + r.epost : ""), via:""});
     if(r.ledsager_vil_bli_medlem) nye.push({navn:r.ledsager_navn || "Ledsager (navn ikke oppgitt)", kontakt:"Ta kontakt via " + r.navn + ", " + r.telefon, via:" (ledsager)"});
   });
+  const hot = data.filter(r => r.trenger_hotell);
+  document.getElementById("t-hotell").textContent = hot.length;
+  document.getElementById("hotell").innerHTML = hot.length
+    ? hot.map(r => `<li><b>${esc(r.navn)}</b>${r.ledsager ? " (+1)" : ""}: ${esc(r.telefon)}${r.epost ? " · " + esc(r.epost) : ""}</li>`).join("")
+    : "<li>Ingen har bedt om hotell ennå.</li>";
   document.getElementById("t-nye").textContent = nye.length;
   document.getElementById("nye").innerHTML = nye.length
     ? nye.map(n => `<li><b>${esc(n.navn)}</b>${esc(n.via)}: ${esc(n.kontakt)}</li>`).join("")
@@ -133,10 +144,11 @@ async function hent(){
   document.getElementById("rader").innerHTML = data.map((r,i) => `<tr>
     <td>${i+1}</td><td><b>${esc(r.navn)}</b></td><td>${esc(r.telefon)}</td><td>${esc(r.epost)}</td><td>${esc(r.bosted)}</td>
     <td>${r.ledsager ? '<span class="merk">+1 ' + esc(r.ledsager_navn) + '</span>' : ''}</td>
+    <td>${r.trenger_hotell ? '<span class="ny">Ja</span>' : ''}</td>
     <td>${r.vil_bli_medlem ? '<span class="ny">Selv</span><br>' : ''}${r.ledsager_vil_bli_medlem ? '<span class="ny">Ledsager</span>' : ''}</td>
     <td>${esc(r.matbehov)}</td><td>${esc(r.hilsen)}</td><td>${tid(r.opprettet)}</td>
     <td><button class="mini" data-id="${r.id}" data-navn="${esc(r.navn)}">Slett</button></td></tr>`).join("")
-    || '<tr><td colspan="11">Ingen påmeldte ennå.</td></tr>';
+    || '<tr><td colspan="12">Ingen påmeldte ennå.</td></tr>';
   const mat = data.filter(r => r.matbehov);
   document.getElementById("mat").innerHTML = mat.length
     ? mat.map(r => `<li><b>${esc(r.navn)}${r.ledsager ? " (+1)" : ""}:</b> ${esc(r.matbehov)}</li>`).join("")
@@ -188,8 +200,8 @@ document.getElementById("lagrekap").onclick = async () => {
 
 document.getElementById("csv").onclick = () => {
   const q = v => '"' + (v ?? "").toString().replace(/"/g,'""') + '"';
-  const hode = ["Nr","Navn","Mobil","E-post","Fra","Ledsager","Ledsagers navn","Vil bli medlem","Ledsager vil bli medlem","Mat","Hilsen","Påmeldt"];
-  const linjer = data.map((r,i) => [i+1,r.navn,r.telefon,r.epost,r.bosted,r.ledsager?"Ja":"Nei",r.ledsager_navn,r.vil_bli_medlem?"Ja":"Nei",r.ledsager_vil_bli_medlem?"Ja":"Nei",r.matbehov,r.hilsen,tid(r.opprettet)].map(q).join(";"));
+  const hode = ["Nr","Navn","Mobil","E-post","Fra","Ledsager","Ledsagers navn","Trenger hotell","Vil bli medlem","Ledsager vil bli medlem","Mat","Hilsen","Påmeldt"];
+  const linjer = data.map((r,i) => [i+1,r.navn,r.telefon,r.epost,r.bosted,r.ledsager?"Ja":"Nei",r.ledsager_navn,r.trenger_hotell?"Ja":"Nei",r.vil_bli_medlem?"Ja":"Nei",r.ledsager_vil_bli_medlem?"Ja":"Nei",r.matbehov,r.hilsen,tid(r.opprettet)].map(q).join(";"));
   const blob = new Blob(["﻿" + [hode.map(q).join(";"), ...linjer].join("\r\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
   a.download = "julebord-motvind-troms-pameldte.csv"; a.click();
