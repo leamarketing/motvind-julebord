@@ -196,6 +196,8 @@ footer .varde{--v:34px;vertical-align:middle;margin:0 10px}
 .dansere span:nth-child(1){animation:dans1 1.1s ease-in-out infinite}
 .dansere span:nth-child(2){animation:dans2 1.1s ease-in-out infinite}
 .dansere span:nth-child(3){animation:hopp .55s ease-in-out infinite;font-size:1.4rem;align-self:flex-start}
+/* Danserne står stille til musikken spiller */
+.dansere:not(.spiller) span{animation-play-state:paused!important}
 @keyframes dans1{0%,100%{transform:rotate(-12deg) translateY(0)}25%{transform:rotate(0) translateY(-8px)}50%{transform:rotate(12deg) translateY(0)}75%{transform:rotate(0) translateY(-5px)}}
 @keyframes dans2{0%,100%{transform:rotate(12deg) translateY(-6px) scaleX(-1)}50%{transform:rotate(-12deg) translateY(0) scaleX(-1)}}
 @keyframes hopp{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-10px) rotate(10deg)}}
@@ -573,8 +575,9 @@ document.getElementById("kalender").addEventListener("click", () => {
   const lyd = document.getElementById("lyd"), knapp = document.getElementById("sang"),
         ikon = document.getElementById("sang-ikon"), tekst = document.getElementById("sang-tekst");
   let stoppetAvBruker = false;
-  lyd.addEventListener("play", () => { document.getElementById("mic").classList.add("danser"); vis(true); });
-  lyd.addEventListener("pause", () => { document.getElementById("mic").classList.remove("danser"); vis(false); });
+  const dansere = document.querySelector(".dansere");
+  lyd.addEventListener("play", () => { document.getElementById("mic").classList.add("danser"); dansere.classList.add("spiller"); vis(true); });
+  lyd.addEventListener("pause", () => { document.getElementById("mic").classList.remove("danser"); dansere.classList.remove("spiller"); vis(false); });
   function vis(spiller){
     ikon.textContent = spiller ? "❚❚" : "🎵";
     tekst.textContent = spiller ? "Pause" : "Spill julesangen";
