@@ -337,7 +337,7 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
         <h2 id="pam-tittel">Meld deg på, så vi vet hvor mye mat vi skal lage</h2>
         <ul class="info-liste">
           <li><span aria-hidden="true">🎄</span><span>Gratis mat og underholdning for medlemmer av Motvind.</span></li>
-          <li><span aria-hidden="true">👫</span><span>Du kan ta med <b>én ledsager</b>. Ledsageren betaler <b>50 kroner i døra</b>.</span></li>
+          <li><span aria-hidden="true">👫</span><span>Du kan ta med <b>én person som ikke er medlem</b>. Den personen betaler <b>50 kroner i døra</b>.</span></li>
           <li class="liten"><span aria-hidden="true">🔞</span><span>16-årsgrense, i følge med foresatte.</span></li>
         </ul>
         <p class="viktig">Påmelding er viktig, så kjøkkenet vet hvor mange de skal lage mat til. Vær så snill!</p>
@@ -377,11 +377,11 @@ footer{background:var(--sno);text-align:center;padding:10px 16px 48px;color:var(
             <legend class="etikett">Hvor mange kommer?</legend>
             <div class="valg-gruppe">
               <label class="valg"><input type="radio" name="antall" value="1" checked><span>Bare meg<small>Gratis</small></span></label>
-              <label class="valg"><input type="radio" name="antall" value="2"><span>Meg + 1 ledsager<small>Ledsager betaler 50 kr i døra</small></span></label>
+              <label class="valg"><input type="radio" name="antall" value="2"><span>Meg + 1 ikke-medlem<small>Ikke-medlem betaler 50 kr i døra</small></span></label>
             </div>
           </fieldset>
           <div class="felt skjult" id="f-ledsager">
-            <label for="ledsager_navn">Ledsagerens navn <span class="valgfri">(valgfritt)</span></label>
+            <label for="ledsager_navn">Navn på den som ikke er medlem <span class="valgfri">(valgfritt)</span></label>
             <input type="text" id="ledsager_navn" name="ledsager_navn" maxlength="120">
           </div>
 
@@ -528,7 +528,7 @@ skjema.addEventListener("submit", async (e) => {
         rad("Påmeldt", naa) +
         rad("Navn", esc(navn)) +
         rad("Mobil", esc(tlf)) +
-        rad("Antall", ledsager ? "2 personer (ledsager betaler 50 kr i døra)" : "1 person") +
+        rad("Antall", ledsager ? "2 personer (ikke-medlem betaler 50 kr i døra)" : "1 person") +
         rad("Når", "Torsdag 10. desember kl. 18.00") +
         rad("Hvor", "Slettaelva Grendehus, Karveslettvegen 51, Tromsø");
       skjema.style.display = "none";
@@ -570,7 +570,7 @@ document.getElementById("kalender").addEventListener("click", () => {
     "UID:julebord-2026@motvind-troms","DTSTAMP:20261118T120000Z",
     "DTSTART;TZID=Europe/Oslo:20261210T180000",
     "SUMMARY:Julebord Motvind Troms","LOCATION:Slettaelva Grendehus\\, Karveslettvegen 51\\, 9100 Tromsø",
-    "DESCRIPTION:Julebord\\, skjemt og alvor med «Någgå' attåt'». Gratis for medlemmer. Ledsager betaler 50 kr i døra.",
+    "DESCRIPTION:Julebord\\, skjemt og alvor med «Någgå' attåt'». Gratis for medlemmer. Ikke-medlem betaler 50 kr i døra.",
     "END:VEVENT","END:VCALENDAR"].join("\r\n");
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([ics], {type:"text/calendar"}));

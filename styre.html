@@ -72,7 +72,7 @@ h2{font-family:Fraunces,Georgia,serif;font-size:1.25rem;margin:28px 0 10px}
     <div class="tall">
       <div class="hoved"><b id="t-personer">0</b><span>personer totalt (mat til)</span></div>
       <div><b id="t-medlem">0</b><span>medlemmer (gratis)</span></div>
-      <div><b id="t-ledsager">0</b><span>ledsagere (50 kr i døra)</span></div>
+      <div><b id="t-ledsager">0</b><span>ikke-medlemmer (50 kr i døra)</span></div>
       <div class="nye"><b id="t-nye">0</b><span>vil bli medlem</span></div>
       <div class="hot"><b id="t-hotell">0</b><span>trenger hotell</span></div>
       <div><b id="t-kap">Ingen grense</b><span>maks antall plasser</span></div>
@@ -89,7 +89,7 @@ h2{font-family:Fraunces,Georgia,serif;font-size:1.25rem;margin:28px 0 10px}
     </div>
 
     <div class="tabell"><table>
-      <thead><tr><th>#</th><th>Navn</th><th>Mobil</th><th>E-post</th><th>Fra</th><th>Ledsager</th><th>Hotell</th><th>Vil bli medlem</th><th>Mat</th><th>Hilsen</th><th>Påmeldt</th><th></th></tr></thead>
+      <thead><tr><th>#</th><th>Navn</th><th>Mobil</th><th>E-post</th><th>Fra</th><th>Ikke-medlem</th><th>Hotell</th><th>Vil bli medlem</th><th>Mat</th><th>Hilsen</th><th>Påmeldt</th><th></th></tr></thead>
       <tbody id="rader"></tbody>
     </table></div>
     <p class="oppdatert" id="oppdatert"></p>
@@ -129,7 +129,7 @@ async function hent(){
   const nye = [];
   data.forEach(r => {
     if(r.vil_bli_medlem) nye.push({navn:r.navn, kontakt:r.telefon + (r.epost ? " · " + r.epost : ""), via:""});
-    if(r.ledsager_vil_bli_medlem) nye.push({navn:r.ledsager_navn || "Ledsager (navn ikke oppgitt)", kontakt:"Ta kontakt via " + r.navn + ", " + r.telefon, via:" (ledsager)"});
+    if(r.ledsager_vil_bli_medlem) nye.push({navn:r.ledsager_navn || "Ikke-medlem (navn ikke oppgitt)", kontakt:"Ta kontakt via " + r.navn + ", " + r.telefon, via:" (følger " + r.navn + ")"});
   });
   const hot = data.filter(r => r.trenger_hotell);
   document.getElementById("t-hotell").textContent = hot.length;
@@ -145,7 +145,7 @@ async function hent(){
     <td>${i+1}</td><td><b>${esc(r.navn)}</b></td><td>${esc(r.telefon)}</td><td>${esc(r.epost)}</td><td>${esc(r.bosted)}</td>
     <td>${r.ledsager ? '<span class="merk">+1 ' + esc(r.ledsager_navn) + '</span>' : ''}</td>
     <td>${r.trenger_hotell ? '<span class="ny">Ja</span>' : ''}</td>
-    <td>${r.vil_bli_medlem ? '<span class="ny">Selv</span><br>' : ''}${r.ledsager_vil_bli_medlem ? '<span class="ny">Ledsager</span>' : ''}</td>
+    <td>${r.vil_bli_medlem ? '<span class="ny">Selv</span><br>' : ''}${r.ledsager_vil_bli_medlem ? '<span class="ny">Ikke-medlem</span>' : ''}</td>
     <td>${esc(r.matbehov)}</td><td>${esc(r.hilsen)}</td><td>${tid(r.opprettet)}</td>
     <td><button class="mini" data-id="${r.id}" data-navn="${esc(r.navn)}">Slett</button></td></tr>`).join("")
     || '<tr><td colspan="12">Ingen påmeldte ennå.</td></tr>';
@@ -200,7 +200,7 @@ document.getElementById("lagrekap").onclick = async () => {
 
 document.getElementById("csv").onclick = () => {
   const q = v => '"' + (v ?? "").toString().replace(/"/g,'""') + '"';
-  const hode = ["Nr","Navn","Mobil","E-post","Fra","Ledsager","Ledsagers navn","Trenger hotell","Vil bli medlem","Ledsager vil bli medlem","Mat","Hilsen","Påmeldt"];
+  const hode = ["Nr","Navn","Mobil","E-post","Fra","Ikke-medlem med","Navn ikke-medlem","Trenger hotell","Vil bli medlem","Ikke-medlem vil bli medlem","Mat","Hilsen","Påmeldt"];
   const linjer = data.map((r,i) => [i+1,r.navn,r.telefon,r.epost,r.bosted,r.ledsager?"Ja":"Nei",r.ledsager_navn,r.trenger_hotell?"Ja":"Nei",r.vil_bli_medlem?"Ja":"Nei",r.ledsager_vil_bli_medlem?"Ja":"Nei",r.matbehov,r.hilsen,tid(r.opprettet)].map(q).join(";"));
   const blob = new Blob(["﻿" + [hode.map(q).join(";"), ...linjer].join("\r\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
