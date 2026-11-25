@@ -522,7 +522,7 @@ skjema.addEventListener("submit", async (e) => {
     });
     if(svar.ok){
       const rad = (k,v) => '<div><span>'+k+'</span><b>'+v+'</b></div>';
-      const naa = new Date().toLocaleString("nb-NO",{day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"});
+      const naa = new Date().toLocaleString("nb-NO",{timeZone:"Europe/Oslo",day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"});
       document.getElementById("oppsum").innerHTML =
         rad("Påmeldingsnummer", "#" + esc(String(svar.nr))) +
         rad("Påmeldt", naa) +
