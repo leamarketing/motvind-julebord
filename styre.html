@@ -9,49 +9,88 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--natt:#0d1f1a;--gran:#1d4a3c;--gull:#e8b04b;--rod:#b8322b;--sno:#fbf8f1;--papir:#fffdf8;--blekk:#1b2420;--dempet:#55625c;--linje:#dcd6c8;--feil:#b3261e}
+:root{--natt:#0d1f1a;--gran:#1d4a3c;--gull:#e8b04b;--rod:#b8322b;--sno:#fbf8f1;--papir:#fffdf8;--blekk:#1b2420;--dempet:#55625c;--linje:#dcd6c8;--feil:#b3261e;--avbud:#8a8f8c}
 *{box-sizing:border-box}
-body{margin:0;background:var(--sno);color:var(--blekk);font:15px/1.5 Inter,system-ui,sans-serif}
-header{background:var(--natt);color:#fff;padding:22px 16px}
-header .inn,main{max-width:1180px;margin:0 auto}
-h1{font-family:Fraunces,Georgia,serif;margin:0;font-size:1.6rem}
-header p{margin:4px 0 0;color:#c5d3cc}
-main{padding:24px 16px 60px}
-.kort{background:var(--papir);border:1px solid var(--linje);border-radius:16px;padding:20px}
-.logg{max-width:420px;margin:40px auto}
-label{display:block;font-weight:600;margin-bottom:6px}
-input{font:inherit;font-size:1.05rem;padding:12px 14px;border:1.5px solid #8f8778;border-radius:10px;width:100%;background:#fff}
-button{font:600 .98rem Inter,sans-serif;border:0;border-radius:999px;padding:12px 22px;cursor:pointer;background:var(--rod);color:#fff}
+html{overflow-x:hidden}
+body{margin:0;background:var(--sno);color:var(--blekk);font:14px/1.45 Inter,system-ui,sans-serif;overflow-wrap:anywhere}
+header{background:var(--natt);color:#fff;padding:14px 16px}
+header .inn,main{max-width:1280px;margin:0 auto}
+h1{font-family:Fraunces,Georgia,serif;margin:0;font-size:1.35rem}
+header p{margin:2px 0 0;color:#c5d3cc;font-size:.88rem}
+main{padding:16px 16px 50px}
+.kort{background:var(--papir);border:1px solid var(--linje);border-radius:14px;padding:18px}
+.logg{max-width:400px;margin:40px auto}
+label{display:block;font-weight:600;margin-bottom:4px;font-size:.85rem}
+input,select{font:inherit;padding:8px 10px;border:1.5px solid #8f8778;border-radius:8px;width:100%;background:#fff;color:var(--blekk)}
+button{font:600 .85rem Inter,sans-serif;border:0;border-radius:999px;padding:8px 14px;cursor:pointer;background:var(--rod);color:#fff;white-space:nowrap}
 button.lys{background:#fff;color:var(--gran);border:1.5px solid var(--gran)}
-button.mini{padding:6px 12px;font-size:.85rem;background:#fff;color:var(--feil);border:1px solid #e3b3ae}
-button:focus-visible,input:focus-visible{outline:3px solid var(--gull);outline-offset:2px}
-.feil{color:var(--feil);margin-top:10px;min-height:1.4em}
-.tall{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px}
-.tall .nye{background:#fff4e0;border-color:var(--gull)}
-.tall .hot{background:#eef6f1;border-color:var(--gran)}
-.mat.hotell li{border-left-color:#3b82a0}
-.ny{display:inline-block;background:var(--gull);color:var(--natt);border-radius:6px;padding:1px 7px;font-size:.8rem;font-weight:700;margin:2px 0}
-.mat.medlem li{border-left-color:var(--gran)}
-.tall div{background:var(--papir);border:1px solid var(--linje);border-radius:14px;padding:16px}
-.tall b{display:block;font-family:Fraunces,Georgia,serif;font-size:2.2rem;line-height:1.1;color:var(--natt)}
-.tall span{color:var(--dempet);font-size:.88rem}
+button.avbud-knapp{background:#fff;color:#8a5a00;border:1.5px solid var(--gull)}
+button.slett{background:#fff;color:var(--feil);border:1px solid #e3b3ae}
+button.angre{background:#fff;color:var(--gran);border:1px solid var(--gran)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gull);outline-offset:2px}
+.feil{color:var(--feil);margin-top:8px;min-height:1.2em}
+
+/* Tall øverst */
+.tall{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:12px}
+.tall div{background:var(--papir);border:1px solid var(--linje);border-radius:12px;padding:10px 12px}
+.tall b{display:block;font-family:Fraunces,Georgia,serif;font-size:1.7rem;line-height:1.1;color:var(--natt)}
+.tall span{color:var(--dempet);font-size:.8rem}
 .tall .hoved{background:var(--gran);border-color:var(--gran)}
 .tall .hoved b,.tall .hoved span{color:#fff}
-.verktoy{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:18px}
-.verktoy .kap{display:flex;gap:8px;align-items:end;margin-left:auto}
-.verktoy .kap input{width:110px}
-.tabell{overflow-x:auto;background:var(--papir);border:1px solid var(--linje);border-radius:14px}
-table{border-collapse:collapse;width:100%;min-width:900px}
-th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linje);vertical-align:top}
-th{background:#f1ece0;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dempet)}
-tr:last-child td{border-bottom:0}
-.merk{display:inline-block;background:#fff4e0;border-radius:6px;padding:1px 7px;font-size:.85rem}
-h2{font-family:Fraunces,Georgia,serif;font-size:1.25rem;margin:28px 0 10px}
+.tall .hot{background:#eef6f1}
+.tall .nye{background:#fff4e0}
+.tall .av{background:#f2f2f0}
+
+.verktoy{display:flex;flex-wrap:wrap;gap:8px;align-items:end;margin-bottom:12px}
+.verktoy .sok{flex:1 1 220px;max-width:320px}
+.verktoy .kap{display:flex;gap:6px;align-items:end;margin-left:auto}
+.verktoy .kap input{width:90px}
+
+h2{font-family:Fraunces,Georgia,serif;font-size:1.15rem;margin:22px 0 8px}
+h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-weight:500}
+
+/* Deltakerrader: tilpasser seg bredden, ingen sidelengs scrolling */
+.liste{background:var(--papir);border:1px solid var(--linje);border-radius:12px;overflow:hidden}
+.hode,.rad{display:grid;grid-template-columns:2.2fr 2.2fr 2fr 1fr auto;gap:10px;padding:9px 12px;align-items:start}
+.hode{background:#f1ece0;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dempet);font-weight:700}
+.rad{border-top:1px solid var(--linje)}
+.rad:nth-child(even){background:#fcfaf4}
+.navn{font-weight:700}
+.nr{color:var(--dempet);font-weight:500;margin-right:4px}
+.liten{font-size:.82rem;color:var(--dempet)}
+.merk{display:inline-block;border-radius:6px;padding:0 6px;font-size:.75rem;font-weight:700;margin:2px 4px 0 0}
+.merk.im{background:#fff4e0}
+.merk.ho{background:#dceee4}
+.merk.me{background:var(--gull);color:var(--natt)}
+.handling{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.avbudsskjema{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:end;background:#fff8e6;border:1px dashed var(--gull);border-radius:10px;padding:10px}
+.avbudsskjema > div{flex:1 1 160px}
+.tom{padding:14px;color:var(--dempet)}
+.rad.avbud{color:var(--avbud)}
+.rad.avbud .navn{text-decoration:line-through}
+.avbudinfo{color:#8a5a00;font-weight:600;font-size:.82rem}
+
+.lister{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
 .mat{list-style:none;padding:0;margin:0}
-.mat li{background:var(--papir);border:1px solid var(--linje);border-left:4px solid var(--gull);border-radius:10px;padding:10px 14px;margin-bottom:8px}
-.oppdatert{color:var(--dempet);font-size:.85rem;margin-top:10px}
-@media (max-width:720px){.tall{grid-template-columns:1fr 1fr}.tall .hoved{grid-column:1/-1}.verktoy .kap{margin-left:0}}
-@media print{header,.verktoy,.logg,button.mini{display:none!important}body{background:#fff}table{min-width:0;font-size:11px}}
+.mat li{background:var(--papir);border:1px solid var(--linje);border-left:4px solid var(--gull);border-radius:8px;padding:7px 10px;margin-bottom:6px}
+.mat.hotell li{border-left-color:#3b82a0}
+.mat.medlem li{border-left-color:var(--gran)}
+.oppdatert{color:var(--dempet);font-size:.8rem;margin-top:8px}
+
+@media (max-width:900px){
+  .hode{display:none}
+  .rad{grid-template-columns:1fr 1fr;gap:4px 12px}
+  .rad > .c1{grid-column:1/-1}
+  .rad > .c5{grid-column:1/-1}
+  .handling{justify-content:flex-start}
+  .verktoy .kap{margin-left:0}
+}
+@media (max-width:520px){.rad{grid-template-columns:1fr}}
+@media print{
+  header,.verktoy,.logg,.handling,#avbud-seksjon,.lister,.oppdatert,.avbudsskjema{display:none!important}
+  body{background:#fff;font-size:11px}
+  .liste{border:0}
+}
 </style>
 </head>
 <body>
@@ -70,16 +109,18 @@ h2{font-family:Fraunces,Georgia,serif;font-size:1.25rem;margin:28px 0 10px}
 
   <section id="innhold" hidden>
     <div class="tall">
-      <div class="hoved"><b id="t-personer">0</b><span>personer totalt (mat til)</span></div>
+      <div class="hoved"><b id="t-personer">0</b><span>kommer (mat til)</span></div>
       <div><b id="t-medlem">0</b><span>medlemmer (gratis)</span></div>
-      <div><b id="t-ledsager">0</b><span>ikke-medlemmer (50 kr i døra)</span></div>
-      <div class="nye"><b id="t-nye">0</b><span>vil bli medlem</span></div>
+      <div><b id="t-ledsager">0</b><span>ikke-medlemmer (50 kr)</span></div>
       <div class="hot"><b id="t-hotell">0</b><span>trenger hotell</span></div>
-      <div><b id="t-kap">Ingen grense</b><span>maks antall plasser</span></div>
+      <div class="nye"><b id="t-nye">0</b><span>vil bli medlem</span></div>
+      <div class="av"><b id="t-avbud">0</b><span>har meldt avbud</span></div>
+      <div><b id="t-ledige">-</b><span id="t-kap">maks plasser</span></div>
     </div>
 
     <div class="verktoy">
-      <button type="button" class="lys" id="hent">Oppdater nå</button>
+      <div class="sok"><label for="sok">Søk navn eller mobil</label><input id="sok" type="search" autocomplete="off"></div>
+      <button type="button" class="lys" id="hent">Oppdater</button>
       <button type="button" class="lys" id="csv">Last ned til Excel</button>
       <button type="button" class="lys" onclick="print()">Skriv ut dørliste</button>
       <div class="kap">
@@ -88,26 +129,27 @@ h2{font-family:Fraunces,Georgia,serif;font-size:1.25rem;margin:28px 0 10px}
       </div>
     </div>
 
-    <div class="tabell"><table>
-      <thead><tr><th>#</th><th>Navn</th><th>Mobil</th><th>E-post</th><th>Fra</th><th>Ikke-medlem</th><th>Hotell</th><th>Vil bli medlem</th><th>Mat</th><th>Hilsen</th><th>Påmeldt</th><th></th></tr></thead>
-      <tbody id="rader"></tbody>
-    </table></div>
+    <h2>Påmeldte <small id="antall-aktive"></small></h2>
+    <div class="liste" id="aktive"></div>
     <p class="oppdatert" id="oppdatert"></p>
 
-    <h2>Trenger hotell</h2>
-    <ul class="mat hotell" id="hotell"></ul>
+    <section id="avbud-seksjon">
+      <h2>Meldt avbud <small>(telles ikke med i totalen)</small></h2>
+      <div class="liste" id="avbudliste"></div>
+    </section>
 
-    <h2>Vil bli medlem i Motvind</h2>
-    <ul class="mat medlem" id="nye"></ul>
-
-    <h2>Allergier og hensyn til maten</h2>
-    <ul class="mat" id="mat"></ul>
+    <div class="lister">
+      <div><h2>Trenger hotell</h2><ul class="mat hotell" id="hotell"></ul></div>
+      <div><h2>Vil bli medlem</h2><ul class="mat medlem" id="nye"></ul></div>
+      <div><h2>Allergier og hensyn</h2><ul class="mat" id="mat"></ul></div>
+    </div>
   </section>
 </main>
 
 <script src="supabase-public.js"></script>
 <script>
-let kode = "", data = [];
+let kode = "", data = [], aapentAvbud = null;
+const HVORDAN = ["Telefon","SMS","E-post","Muntlig","Facebook / Messenger","Annet"];
 async function rpc(fn, body){
   const r = await fetch(MV_SUPABASE.url + "/rest/v1/rpc/" + fn, {method:"POST",
     headers:{apikey:MV_SUPABASE.publishable,"Content-Type":"application/json"}, body:JSON.stringify(body||{})});
@@ -115,45 +157,78 @@ async function rpc(fn, body){
   return r.json();
 }
 const esc = s => (s ?? "").toString().replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const tid = t => new Date(t).toLocaleString("nb-NO",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+const tid = t => t ? new Date(t).toLocaleString("nb-NO",{timeZone:"Europe/Oslo",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}) : "";
 
+function treff(r){
+  const q = document.getElementById("sok").value.trim().toLowerCase();
+  if(!q) return true;
+  return [r.navn, r.telefon, r.ledsager_navn, r.epost].some(v => (v||"").toLowerCase().includes(q));
+}
+
+function radHtml(r, nr, erAvbud){
+  const ikkeMedlem = r.ledsager ? `<span class="merk im">+1 ikke-medlem${r.ledsager_navn ? ": " + esc(r.ledsager_navn) : ""}</span>` : "";
+  const merker = (r.trenger_hotell ? '<span class="merk ho">Hotell</span>' : "") +
+    (r.vil_bli_medlem ? '<span class="merk me">Vil bli medlem</span>' : "") +
+    (r.ledsager_vil_bli_medlem ? '<span class="merk me">Ikke-medlem vil bli medlem</span>' : "");
+  const tekst = [r.matbehov ? "Mat: " + esc(r.matbehov) : "", r.hilsen ? "Hilsen: " + esc(r.hilsen) : ""].filter(Boolean).join("<br>");
+  const avbudinfo = erAvbud ? `<div class="avbudinfo">Avbud ${tid(r.avbud_tid)}${r.avbud_hvordan ? " · " + esc(r.avbud_hvordan) : ""}</div>${r.avbud_notat ? `<div class="liten">${esc(r.avbud_notat)}</div>` : ""}` : "";
+  const knapper = erAvbud
+    ? `<button class="angre" data-angre="${r.id}">Angre avbud</button><button class="slett" data-slett="${r.id}" data-navn="${esc(r.navn)}">Slett for godt</button>`
+    : `<button class="avbud-knapp" data-avbud="${r.id}">Meld avbud</button><button class="slett" data-slett="${r.id}" data-navn="${esc(r.navn)}">Slett</button>`;
+  const skjema = (!erAvbud && aapentAvbud === r.id) ? `<div class="avbudsskjema">
+      <div><label for="av-hvordan">Hvordan meldte de avbud?</label><select id="av-hvordan">${HVORDAN.map(h=>`<option>${h}</option>`).join("")}</select></div>
+      <div><label for="av-notat">Notat (valgfritt)</label><input id="av-notat" maxlength="300" placeholder="F.eks. syk, ringte Anita"></div>
+      <button data-lagreavbud="${r.id}">Lagre avbud</button><button class="lys" data-lukk="1">Avbryt</button>
+    </div>` : "";
+  return `<div class="rad${erAvbud ? " avbud" : ""}">
+    <div class="c1"><span class="nr">${nr}.</span><span class="navn">${esc(r.navn)}</span><br>${ikkeMedlem}${avbudinfo}</div>
+    <div class="c2">${esc(r.telefon)}${r.epost ? `<br><span class="liten">${esc(r.epost)}</span>` : ""}${r.bosted ? `<br><span class="liten">${esc(r.bosted)}</span>` : ""}</div>
+    <div class="c3">${merker}${tekst ? `<div class="liten">${tekst}</div>` : ""}</div>
+    <div class="c4 liten">Påmeldt<br>${tid(r.opprettet)}</div>
+    <div class="c5 handling">${knapper}</div>
+    ${skjema}
+  </div>`;
+}
+
+function tegn(kapasitet){
+  const aktive = data.filter(r => !r.avbud_tid), avbud = data.filter(r => r.avbud_tid);
+  const led = aktive.filter(r => r.ledsager).length;
+  const personer = aktive.length + led;
+  document.getElementById("t-personer").textContent = personer;
+  document.getElementById("t-medlem").textContent = aktive.length;
+  document.getElementById("t-ledsager").textContent = led;
+  document.getElementById("t-hotell").textContent = aktive.filter(r => r.trenger_hotell).length;
+  document.getElementById("t-avbud").textContent = avbud.length;
+  document.getElementById("t-ledige").textContent = kapasitet ? Math.max(0, kapasitet - personer) : "-";
+  document.getElementById("t-kap").textContent = kapasitet ? "ledige av " + kapasitet : "ingen grense";
+
+  const visAktive = aktive.filter(treff), visAvbud = avbud.filter(treff);
+  document.getElementById("antall-aktive").textContent = `(${aktive.length} påmeldinger, ${personer} personer)`;
+  const hode = '<div class="hode"><div>Navn</div><div>Kontakt</div><div>Ønsker og mat</div><div>Påmeldt</div><div></div></div>';
+  document.getElementById("aktive").innerHTML = visAktive.length ? hode + visAktive.map((r,i) => radHtml(r, i+1, false)).join("") : '<div class="tom">Ingen påmeldte å vise.</div>';
+  document.getElementById("avbudliste").innerHTML = visAvbud.length ? hode + visAvbud.map((r,i) => radHtml(r, i+1, true)).join("") : '<div class="tom">Ingen har meldt avbud.</div>';
+
+  const hot = aktive.filter(r => r.trenger_hotell);
+  document.getElementById("hotell").innerHTML = hot.length ? hot.map(r => `<li><b>${esc(r.navn)}</b>${r.ledsager ? " (+1)" : ""}: ${esc(r.telefon)}${r.epost ? " · " + esc(r.epost) : ""}</li>`).join("") : "<li>Ingen har bedt om hotell.</li>";
+  const nye = [];
+  aktive.forEach(r => {
+    if(r.vil_bli_medlem) nye.push(`<li><b>${esc(r.navn)}</b>: ${esc(r.telefon)}${r.epost ? " · " + esc(r.epost) : ""}</li>`);
+    if(r.ledsager_vil_bli_medlem) nye.push(`<li><b>${esc(r.ledsager_navn || "Ikke-medlem")}</b> (følger ${esc(r.navn)}): ta kontakt via ${esc(r.telefon)}</li>`);
+  });
+  document.getElementById("t-nye").textContent = nye.length;
+  document.getElementById("nye").innerHTML = nye.length ? nye.join("") : "<li>Ingen har bedt om medlemskap.</li>";
+  const mat = aktive.filter(r => r.matbehov);
+  document.getElementById("mat").innerHTML = mat.length ? mat.map(r => `<li><b>${esc(r.navn)}${r.ledsager ? " (+1)" : ""}:</b> ${esc(r.matbehov)}</li>`).join("") : "<li>Ingen har meldt inn allergier.</li>";
+}
+
+let sisteKap = null;
 async function hent(){
   const s = await rpc("motvind_julebord_liste", {p_kode:kode});
   if(!s.ok) return false;
-  data = s.rader;
-  const led = data.filter(r => r.ledsager).length;
-  document.getElementById("t-personer").textContent = data.length + led;
-  document.getElementById("t-medlem").textContent = data.length;
-  document.getElementById("t-ledsager").textContent = led;
-  document.getElementById("t-kap").textContent = s.kapasitet || "Ingen grense";
-  const nye = [];
-  data.forEach(r => {
-    if(r.vil_bli_medlem) nye.push({navn:r.navn, kontakt:r.telefon + (r.epost ? " · " + r.epost : ""), via:""});
-    if(r.ledsager_vil_bli_medlem) nye.push({navn:r.ledsager_navn || "Ikke-medlem (navn ikke oppgitt)", kontakt:"Ta kontakt via " + r.navn + ", " + r.telefon, via:" (følger " + r.navn + ")"});
-  });
-  const hot = data.filter(r => r.trenger_hotell);
-  document.getElementById("t-hotell").textContent = hot.length;
-  document.getElementById("hotell").innerHTML = hot.length
-    ? hot.map(r => `<li><b>${esc(r.navn)}</b>${r.ledsager ? " (+1)" : ""}: ${esc(r.telefon)}${r.epost ? " · " + esc(r.epost) : ""}</li>`).join("")
-    : "<li>Ingen har bedt om hotell ennå.</li>";
-  document.getElementById("t-nye").textContent = nye.length;
-  document.getElementById("nye").innerHTML = nye.length
-    ? nye.map(n => `<li><b>${esc(n.navn)}</b>${esc(n.via)}: ${esc(n.kontakt)}</li>`).join("")
-    : "<li>Ingen har bedt om medlemskap ennå.</li>";
+  data = s.rader; sisteKap = s.kapasitet;
   document.getElementById("kapasitet").value = s.kapasitet || "";
-  document.getElementById("rader").innerHTML = data.map((r,i) => `<tr>
-    <td>${i+1}</td><td><b>${esc(r.navn)}</b></td><td>${esc(r.telefon)}</td><td>${esc(r.epost)}</td><td>${esc(r.bosted)}</td>
-    <td>${r.ledsager ? '<span class="merk">+1 ' + esc(r.ledsager_navn) + '</span>' : ''}</td>
-    <td>${r.trenger_hotell ? '<span class="ny">Ja</span>' : ''}</td>
-    <td>${r.vil_bli_medlem ? '<span class="ny">Selv</span><br>' : ''}${r.ledsager_vil_bli_medlem ? '<span class="ny">Ikke-medlem</span>' : ''}</td>
-    <td>${esc(r.matbehov)}</td><td>${esc(r.hilsen)}</td><td>${tid(r.opprettet)}</td>
-    <td><button class="mini" data-id="${r.id}" data-navn="${esc(r.navn)}">Slett</button></td></tr>`).join("")
-    || '<tr><td colspan="12">Ingen påmeldte ennå.</td></tr>';
-  const mat = data.filter(r => r.matbehov);
-  document.getElementById("mat").innerHTML = mat.length
-    ? mat.map(r => `<li><b>${esc(r.navn)}${r.ledsager ? " (+1)" : ""}:</b> ${esc(r.matbehov)}</li>`).join("")
-    : "<li>Ingen har meldt inn allergier eller hensyn.</li>";
-  document.getElementById("oppdatert").textContent = "Sist oppdatert " + new Date().toLocaleTimeString("nb-NO") + ". Oppdateres av seg selv hvert minutt.";
+  tegn(s.kapasitet);
+  document.getElementById("oppdatert").textContent = "Sist oppdatert " + new Date().toLocaleTimeString("nb-NO",{timeZone:"Europe/Oslo"}) + ". Oppdateres av seg selv hvert minutt.";
   return true;
 }
 
@@ -170,7 +245,7 @@ async function apne(k){
     if(await hent()){
       document.getElementById("logg").hidden = true;
       document.getElementById("innhold").hidden = false;
-      setInterval(() => hent().catch(()=>{}), 60000);
+      setInterval(() => { if(aapentAvbud === null) hent().catch(()=>{}); }, 60000);
       return true;
     }
     f.textContent = "Feil kode.";
@@ -183,13 +258,25 @@ if(lenkeKode){
   document.getElementById("logg").hidden = true;
   apne(lenkeKode);
 }
-document.getElementById("hent").onclick = () => hent();
 
-document.getElementById("rader").addEventListener("click", async e => {
-  const b = e.target.closest("button[data-id]"); if(!b) return;
-  if(!confirm("Slette påmeldingen til " + b.dataset.navn + "? Dette kan ikke angres.")) return;
-  await rpc("motvind_julebord_slett", {p_kode:kode, p_id:Number(b.dataset.id)});
-  hent();
+document.getElementById("hent").onclick = () => hent();
+document.getElementById("sok").addEventListener("input", () => tegn(sisteKap));
+
+document.getElementById("innhold").addEventListener("click", async e => {
+  const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.avbud){ aapentAvbud = Number(b.dataset.avbud); tegn(sisteKap); document.getElementById("av-hvordan").focus(); return; }
+  if(b.dataset.lukk){ aapentAvbud = null; tegn(sisteKap); return; }
+  if(b.dataset.lagreavbud){
+    const hvordan = document.getElementById("av-hvordan").value, notat = document.getElementById("av-notat").value;
+    b.disabled = true;
+    await rpc("motvind_julebord_avbud", {p_kode:kode, p_id:Number(b.dataset.lagreavbud), p_hvordan:hvordan, p_notat:notat});
+    aapentAvbud = null; hent(); return;
+  }
+  if(b.dataset.angre){ await rpc("motvind_julebord_angre_avbud", {p_kode:kode, p_id:Number(b.dataset.angre)}); hent(); return; }
+  if(b.dataset.slett){
+    if(!confirm("Slette " + b.dataset.navn + " for godt? Da forsvinner også historikken. Vil du bare trekke personen fra totalen, bruk «Meld avbud» i stedet.")) return;
+    await rpc("motvind_julebord_slett", {p_kode:kode, p_id:Number(b.dataset.slett)}); hent();
+  }
 });
 
 document.getElementById("lagrekap").onclick = async () => {
@@ -200,8 +287,10 @@ document.getElementById("lagrekap").onclick = async () => {
 
 document.getElementById("csv").onclick = () => {
   const q = v => '"' + (v ?? "").toString().replace(/"/g,'""') + '"';
-  const hode = ["Nr","Navn","Mobil","E-post","Fra","Ikke-medlem med","Navn ikke-medlem","Trenger hotell","Vil bli medlem","Ikke-medlem vil bli medlem","Mat","Hilsen","Påmeldt"];
-  const linjer = data.map((r,i) => [i+1,r.navn,r.telefon,r.epost,r.bosted,r.ledsager?"Ja":"Nei",r.ledsager_navn,r.trenger_hotell?"Ja":"Nei",r.vil_bli_medlem?"Ja":"Nei",r.ledsager_vil_bli_medlem?"Ja":"Nei",r.matbehov,r.hilsen,tid(r.opprettet)].map(q).join(";"));
+  const hode = ["Nr","Status","Navn","Mobil","E-post","Fra","Ikke-medlem med","Navn ikke-medlem","Trenger hotell","Vil bli medlem","Ikke-medlem vil bli medlem","Mat","Hilsen","Påmeldt","Avbud meldt","Avbud hvordan","Avbud notat"];
+  const linjer = data.map((r,i) => [i+1, r.avbud_tid ? "Avbud" : "Påmeldt", r.navn, r.telefon, r.epost, r.bosted, r.ledsager?"Ja":"Nei", r.ledsager_navn,
+    r.trenger_hotell?"Ja":"Nei", r.vil_bli_medlem?"Ja":"Nei", r.ledsager_vil_bli_medlem?"Ja":"Nei", r.matbehov, r.hilsen, tid(r.opprettet),
+    tid(r.avbud_tid), r.avbud_hvordan, r.avbud_notat].map(q).join(";"));
   const blob = new Blob(["﻿" + [hode.map(q).join(";"), ...linjer].join("\r\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
   a.download = "julebord-motvind-troms-pameldte.csv"; a.click();
