@@ -111,10 +111,52 @@ h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-w
 /* Sammenfoldede rader: knappelinje øverst, detaljer under i full bredde */
 .liste .rad{display:block;padding:0}
 .liste .rad .detaljer{width:100%}
+/* Innsjekk i døra */
+.radlinje{display:flex;align-items:center;gap:6px;padding-right:10px}
+.radlinje .radtopp{flex:1 1 auto;min-width:0}
+.innsjekk{display:flex;gap:6px;flex-wrap:nowrap;justify-content:flex-end}
+.sjekk{background:#fff;color:var(--gran);border:1.5px solid #9fc2b1;padding:5px 11px;font-size:.8rem}
+.sjekk.pa{background:var(--gran);color:#fff;border-color:var(--gran)}
+.sjekk.betal{border-color:#e8c98a;color:#8a5a00}
+.sjekk.betal.pa{background:var(--gull);color:var(--natt);border-color:var(--gull)}
+.tall .inn{background:#eaf4ff}
+@media (max-width:620px){.radlinje{flex-wrap:wrap;padding:0 10px 8px 0}.innsjekk{padding-left:34px;justify-content:flex-start}}
+
+/* QR-kode: liten i toppen, stor ved klikk */
+header .inn{position:relative}
+.qr-liten{position:absolute;right:0;top:0;background:#fff;border:0;border-radius:10px;padding:5px;cursor:zoom-in;line-height:0}
+.qr-liten img{width:64px;height:64px;display:block}
+.qr-liten span{display:block;font:600 .62rem Inter,sans-serif;color:var(--natt);line-height:1.2;margin-top:3px}
+.qr-stor{position:fixed;inset:0;background:rgba(13,31,26,.88);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px}
+.qr-stor[hidden]{display:none}
+.qr-stor figure{margin:0;background:#fff;border-radius:18px;padding:22px;text-align:center;max-width:min(92vw,520px)}
+.qr-stor img{width:min(80vw,440px);height:auto;display:block;margin:0 auto}
+.qr-stor figcaption{font:700 1.1rem Inter,sans-serif;color:var(--natt);margin-top:10px}
+.qr-stor figcaption small{display:block;font-weight:500;color:var(--dempet);font-size:.85rem;margin-top:4px}
+.qr-stor button{margin-top:14px}
+@media (max-width:620px){.qr-liten{position:static;margin-top:8px;display:inline-block}}
+
+/* Utskrift: egen dørliste med avkrysningsruter, alt annet skjules */
+#dorliste{display:none}
 @media print{
-  header,.verktoy,.logg,.handling,#avbud-seksjon,.lister,.oppdatert,.avbudsskjema{display:none!important}
-  body{background:#fff;font-size:11px}
-  .liste{border:0}
+  @page{margin:12mm}
+  body{background:#fff;font-size:11pt}
+  header,main > *:not(#innhold),#innhold > *:not(#dorliste),.qr-stor{display:none!important}
+  #dorliste{display:block}
+  #dorliste .dl-topp{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:8px}
+  #dorliste h1{font-size:16pt;color:#000;margin:0}
+  #dorliste .dl-info{font-size:10pt;margin:2px 0 0}
+  #dorliste .dl-qr{text-align:center;font-size:8pt}
+  #dorliste .dl-qr img{width:28mm;height:28mm;display:block}
+  #dorliste table{border-collapse:collapse;width:100%}
+  #dorliste th,#dorliste td{border:1px solid #888;padding:5px 6px;text-align:left;vertical-align:top}
+  #dorliste th{background:#eee;font-size:9pt}
+  #dorliste tr{break-inside:avoid}
+  #dorliste .boks{width:16mm;text-align:center;font-size:14pt}
+  #dorliste th.boks{font-size:9pt}
+  #dorliste .mob{white-space:nowrap;width:30mm}
+  #dorliste .nr{width:8mm;color:#000}
+  #dorliste .tom-rad td{height:9mm}
 }
 </style>
 </head>
@@ -123,6 +165,7 @@ h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-w
   <h1>Julebord Motvind Troms: påmeldte</h1>
   <p>Torsdag 10. desember 2026 fra kl. 18.00 · Slettelva Grendehus</p>
   <a class="til-skjema" href="./" target="_blank" rel="noopener">Åpne påmeldingsskjemaet <span aria-hidden="true">↗</span></a>
+  <button type="button" class="qr-liten" id="qr-apne" aria-label="Vis QR-kode til påmeldingsskjemaet i stor størrelse"><img src="qr-pamelding.svg" alt=""><span>Klikk for stor</span></button>
 </div></header>
 
 <main>
@@ -141,6 +184,8 @@ h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-w
       <div class="hot"><b id="t-hotell">0</b><span>trenger hotell</span></div>
       <div class="nye"><b id="t-nye">0</b><span>vil bli medlem</span></div>
       <div class="av"><b id="t-avbud">0</b><span>har meldt avbud</span></div>
+      <div class="inn"><b id="t-kommet">0</b><span id="t-kommet-tekst">har kommet</span></div>
+      <div class="inn"><b id="t-betalt">0</b><span id="t-betalt-tekst">har betalt 50 kr</span></div>
       <div><b id="t-ledige">-</b><span id="t-kap">maks plasser</span></div>
     </div>
 
@@ -175,8 +220,32 @@ h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-w
       <div><h2>Vil bli medlem</h2><ul class="mat medlem" id="nye"></ul></div>
       <div><h2>Allergier og hensyn</h2><ul class="mat" id="mat"></ul></div>
     </div>
+
+    <!-- Bare ved utskrift: dørliste med avkrysningsruter -->
+    <div id="dorliste" aria-hidden="true">
+      <div class="dl-topp">
+        <div>
+          <h1>Dørliste: Julebord Motvind Troms</h1>
+          <p class="dl-info">Torsdag 10. desember 2026 fra kl. 18.00 · Slettaelva Grendehus</p>
+          <p class="dl-info" id="dl-tall"></p>
+        </div>
+        <div class="dl-qr"><img src="qr-pamelding.svg" alt=""><br>Påmelding</div>
+      </div>
+      <table>
+        <thead><tr><th class="nr">#</th><th class="boks">Kom</th><th>Navn</th><th>Ikke-medlem (+1)</th><th class="boks">Betalt 50 kr</th><th>Allergier / hensyn</th><th class="mob">Mobil</th></tr></thead>
+        <tbody id="dl-rader"></tbody>
+      </table>
+    </div>
   </section>
 </main>
+
+<div class="qr-stor" id="qr-stor" hidden role="dialog" aria-modal="true" aria-label="QR-kode til påmeldingsskjemaet">
+  <figure>
+    <img src="qr-pamelding.svg" alt="QR-kode til påmeldingsskjemaet for julebordet">
+    <figcaption>Skann for å melde deg på julebordet<small>leamarketing.github.io/motvind-julebord</small></figcaption>
+    <button type="button" id="qr-lukk">Lukk</button>
+  </figure>
+</div>
 
 <script src="supabase-public.js"></script>
 <script>
@@ -215,11 +284,17 @@ function radHtml(r, nr, erAvbud){
     </div>` : "";
   const aapen = aapneRader.has(r.id);
   return `<div class="rad${erAvbud ? " avbud" : ""}${aapen ? " aapen" : ""}${markert === r.id ? " markert" : ""}" id="rad-${r.id}">
-    <button class="radtopp" data-veksle="${r.id}" aria-expanded="${aapen}">
-      <span class="nr">${nr}.</span><span class="navn">${esc(r.navn)}</span>
-      ${r.ledsager ? '<span class="merk im">+1</span>' : ""}${merker}
-      <span class="pil" aria-hidden="true">${aapen ? "▲" : "▼"}</span>
-    </button>
+    <div class="radlinje">
+      <button class="radtopp" data-veksle="${r.id}" aria-expanded="${aapen}">
+        <span class="nr">${nr}.</span><span class="navn">${esc(r.navn)}</span>
+        ${r.ledsager ? '<span class="merk im">+1</span>' : ""}${merker}
+        <span class="pil" aria-hidden="true">${aapen ? "▲" : "▼"}</span>
+      </button>
+      ${erAvbud ? "" : `<span class="innsjekk">
+        <button class="sjekk${r.innsjekket_tid ? " pa" : ""}" data-sjekk="kommet" data-id="${r.id}" aria-pressed="${!!r.innsjekket_tid}" title="${r.innsjekket_tid ? "Kom " + tid(r.innsjekket_tid) : "Marker som kommet"}">${r.innsjekket_tid ? "✔ Kommet" : "Kommet?"}</button>
+        ${r.ledsager ? `<button class="sjekk betal${r.betalt_tid ? " pa" : ""}" data-sjekk="betalt" data-id="${r.id}" aria-pressed="${!!r.betalt_tid}" title="Ikke-medlem betaler 50 kr i døra">${r.betalt_tid ? "✔ 50 kr betalt" : "50 kr betalt?"}</button>` : ""}
+      </span>`}
+    </div>
     ${aapen ? `<div class="detaljer">
       <div class="c1">${ikkeMedlem}${avbudinfo}<div class="liten">Påmeldt ${tid(r.opprettet)}</div></div>
       <div class="c2">📞 ${esc(r.telefon)}${r.epost ? `<br><span class="liten">✉️ ${esc(r.epost)}</span>` : ""}${r.bosted ? `<br><span class="liten">📍 ${esc(r.bosted)}</span>` : ""}</div>
@@ -249,6 +324,21 @@ function tegn(kapasitet){
   document.getElementById("t-hotell").textContent = aktive.filter(r => r.trenger_hotell).length;
   document.getElementById("t-avbud").textContent = avbud.length;
   document.getElementById("t-ledige").textContent = kapasitet ? Math.max(0, kapasitet - personer) : "-";
+  // Innsjekk-tellere: personer som har kommet (medlem + ikke-medlem i samme påmelding), og betalte 50 kr
+  const kommet = aktive.filter(r => r.innsjekket_tid);
+  document.getElementById("t-kommet").textContent = kommet.reduce((s, r) => s + 1 + (r.ledsager ? 1 : 0), 0);
+  document.getElementById("t-kommet-tekst").textContent = "har kommet av " + personer;
+  document.getElementById("t-betalt").textContent = aktive.filter(r => r.ledsager && r.betalt_tid).length;
+  document.getElementById("t-betalt-tekst").textContent = "av " + led + " har betalt 50 kr";
+  // Dørliste for utskrift: alfabetisk, med tomme rader nederst for de som kommer uten påmelding
+  const alfa = [...aktive].sort((x,y) => x.navn.localeCompare(y.navn, "nb"));
+  document.getElementById("dl-tall").textContent = `${aktive.length} påmeldinger · ${personer} personer · ${led} ikke-medlemmer à 50 kr · utskrevet ${new Date().toLocaleString("nb-NO",{timeZone:"Europe/Oslo",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}`;
+  document.getElementById("dl-rader").innerHTML = alfa.map((r,i) => `<tr>
+      <td class="nr">${i+1}</td><td class="boks">${r.innsjekket_tid ? "☑" : "☐"}</td><td><b>${esc(r.navn)}</b></td>
+      <td>${r.ledsager ? (r.ledsager_navn ? esc(r.ledsager_navn) : "Ja, navn ikke oppgitt") : ""}</td>
+      <td class="boks">${r.ledsager ? (r.betalt_tid ? "☑" : "☐") : ""}</td>
+      <td>${esc(r.matbehov)}</td><td class="mob">${esc(r.telefon)}</td></tr>`).join("") +
+    Array.from({length:6}, () => '<tr class="tom-rad"><td></td><td class="boks">☐</td><td></td><td></td><td class="boks">☐</td><td></td><td class="mob"></td></tr>').join("");
   document.getElementById("t-kap").textContent = kapasitet ? "ledige av " + kapasitet : "ingen grense";
 
   const visAktive = aktive.filter(treff), visAvbud = avbud.filter(treff);
@@ -316,6 +406,16 @@ document.getElementById("sok").addEventListener("input", () => tegn(sisteKap));
 
 document.getElementById("innhold").addEventListener("click", async e => {
   const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.sjekk){
+    const id = Number(b.dataset.id), felt = b.dataset.sjekk, r = data.find(x => x.id === id);
+    const naa = felt === "kommet" ? !r.innsjekket_tid : !r.betalt_tid;
+    // Vis endringen med en gang, lagre i bakgrunnen
+    if(felt === "kommet") r.innsjekket_tid = naa ? new Date().toISOString() : null; else r.betalt_tid = naa ? new Date().toISOString() : null;
+    tegn(sisteKap);
+    try{ await rpc("motvind_julebord_innsjekk", {p_kode:kode, p_id:id, p_felt:felt, p_verdi:naa}); }
+    catch(err){ alert("Fikk ikke lagret. Sjekk nettet og prøv igjen."); hent(); }
+    return;
+  }
   if(b.dataset.veksle){ const id = Number(b.dataset.veksle); aapneRader.has(id) ? aapneRader.delete(id) : aapneRader.add(id); markert = null; tegn(sisteKap); return; }
   if(b.dataset.hopp){
     const id = Number(b.dataset.hopp);
@@ -342,6 +442,14 @@ document.getElementById("innhold").addEventListener("click", async e => {
   }
 });
 
+// QR-kode: klikk for stor visning, lukk med knapp, klikk utenfor eller Esc
+const qrStor = document.getElementById("qr-stor");
+document.getElementById("qr-apne").onclick = () => { qrStor.hidden = false; document.getElementById("qr-lukk").focus(); };
+const lukkQr = () => { qrStor.hidden = true; document.getElementById("qr-apne").focus(); };
+document.getElementById("qr-lukk").onclick = lukkQr;
+qrStor.addEventListener("click", e => { if(e.target === qrStor) lukkQr(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape" && !qrStor.hidden) lukkQr(); });
+
 document.getElementById("lagrekap").onclick = async () => {
   const v = parseInt(document.getElementById("kapasitet").value || "0", 10);
   await rpc("motvind_julebord_sett_kapasitet", {p_kode:kode, p_kapasitet:v});
@@ -350,10 +458,10 @@ document.getElementById("lagrekap").onclick = async () => {
 
 document.getElementById("csv").onclick = () => {
   const q = v => '"' + (v ?? "").toString().replace(/"/g,'""') + '"';
-  const hode = ["Nr","Status","Navn","Mobil","E-post","Fra","Ikke-medlem med","Navn ikke-medlem","Trenger hotell","Vil bli medlem","Ikke-medlem vil bli medlem","Mat","Hilsen","Påmeldt","Avbud meldt","Avbud hvordan","Avbud notat"];
+  const hode = ["Nr","Status","Navn","Mobil","E-post","Fra","Ikke-medlem med","Navn ikke-medlem","Trenger hotell","Vil bli medlem","Ikke-medlem vil bli medlem","Mat","Hilsen","Påmeldt","Avbud meldt","Avbud hvordan","Avbud notat","Kom (tid)","50 kr betalt (tid)"];
   const linjer = data.map((r,i) => [i+1, r.avbud_tid ? "Avbud" : "Påmeldt", r.navn, r.telefon, r.epost, r.bosted, r.ledsager?"Ja":"Nei", r.ledsager_navn,
     r.trenger_hotell?"Ja":"Nei", r.vil_bli_medlem?"Ja":"Nei", r.ledsager_vil_bli_medlem?"Ja":"Nei", r.matbehov, r.hilsen, tid(r.opprettet),
-    tid(r.avbud_tid), r.avbud_hvordan, r.avbud_notat].map(q).join(";"));
+    tid(r.avbud_tid), r.avbud_hvordan, r.avbud_notat, tid(r.innsjekket_tid), tid(r.betalt_tid)].map(q).join(";"));
   const blob = new Blob(["﻿" + [hode.map(q).join(";"), ...linjer].join("\r\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
   a.download = "julebord-motvind-troms-pameldte.csv"; a.click();
