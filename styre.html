@@ -49,6 +49,24 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 h2{font-family:Fraunces,Georgia,serif;font-size:1.15rem;margin:22px 0 8px}
 h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-weight:500}
 
+/* Navneoversikt og sammenfoldede rader */
+.navneoversikt{display:flex;flex-wrap:wrap;gap:6px;background:var(--papir);border:1px solid var(--linje);border-radius:12px;padding:10px}
+.navneknapp{background:#fff;color:var(--natt);border:1px solid var(--linje);border-radius:999px;padding:5px 11px;font-weight:600;font-size:.85rem}
+.navneknapp:hover{border-color:var(--gran);background:#eef6f1}
+.navneknapp small{color:var(--dempet);font-weight:500}
+.navneknapp.av{color:var(--avbud);text-decoration:line-through;background:#f2f2f0}
+.navneoversikt .skille{flex-basis:100%;font-size:.78rem;color:var(--dempet);margin-top:4px}
+.alle-knapper{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.radtopp{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;text-align:left;background:transparent;color:var(--blekk);border-radius:0;padding:9px 12px;font:inherit;white-space:normal}
+.radtopp:hover{background:#f6f1e4}
+.radtopp .pil{margin-left:auto;color:var(--dempet);font-size:.75rem}
+.rad .detaljer{display:grid;grid-template-columns:1.6fr 1.6fr 2fr auto;gap:10px;padding:4px 12px 12px 34px;align-items:start}
+.rad.aapen{background:#fffaf0!important}
+.rad.markert{box-shadow:inset 4px 0 0 var(--gull);animation:blink-rad 1.6s ease-out 1}
+@keyframes blink-rad{0%{background:#ffe9a8}100%{background:#fffaf0}}
+@media (max-width:900px){.rad .detaljer{grid-template-columns:1fr 1fr;padding-left:12px}.rad .detaljer .c5{grid-column:1/-1}}
+@media (max-width:520px){.rad .detaljer{grid-template-columns:1fr}}
+
 /* Deltakerrader: tilpasser seg bredden, ingen sidelengs scrolling */
 .liste{background:var(--papir);border:1px solid var(--linje);border-radius:12px;overflow:hidden}
 .hode,.rad{display:grid;grid-template-columns:2.2fr 2.2fr 2fr 1fr auto;gap:10px;padding:9px 12px;align-items:start}
@@ -86,6 +104,9 @@ h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-w
   .verktoy .kap{margin-left:0}
 }
 @media (max-width:520px){.rad{grid-template-columns:1fr}}
+/* Sammenfoldede rader: knappelinje øverst, detaljer under i full bredde */
+.liste .rad{display:block;padding:0}
+.liste .rad .detaljer{width:100%}
 @media print{
   header,.verktoy,.logg,.handling,#avbud-seksjon,.lister,.oppdatert,.avbudsskjema{display:none!important}
   body{background:#fff;font-size:11px}
@@ -129,7 +150,13 @@ h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-w
       </div>
     </div>
 
+    <section id="navn-seksjon">
+      <h2>Alle navn <small>(klikk et navn for å gå rett til personen)</small></h2>
+      <div class="navneoversikt" id="navneoversikt"></div>
+    </section>
+
     <h2>Påmeldte <small id="antall-aktive"></small></h2>
+    <div class="alle-knapper"><button type="button" class="lys" data-alle="aapne">Åpne alle</button><button type="button" class="lys" data-alle="lukk">Lukk alle</button><button type="button" class="lys" data-tilbake="1">↑ Til navnelista</button></div>
     <div class="liste" id="aktive"></div>
     <p class="oppdatert" id="oppdatert"></p>
 
@@ -148,7 +175,8 @@ h2 small{font-family:Inter,sans-serif;font-size:.8rem;color:var(--dempet);font-w
 
 <script src="supabase-public.js"></script>
 <script>
-let kode = "", data = [], aapentAvbud = null;
+let kode = "", data = [], aapentAvbud = null, markert = null;
+const aapneRader = new Set();
 const HVORDAN = ["Telefon","SMS","E-post","Muntlig","Facebook / Messenger","Annet"];
 async function rpc(fn, body){
   const r = await fetch(MV_SUPABASE.url + "/rest/v1/rpc/" + fn, {method:"POST",
@@ -180,14 +208,30 @@ function radHtml(r, nr, erAvbud){
       <div><label for="av-notat">Notat (valgfritt)</label><input id="av-notat" maxlength="300" placeholder="F.eks. syk, ringte Anita"></div>
       <button data-lagreavbud="${r.id}">Lagre avbud</button><button class="lys" data-lukk="1">Avbryt</button>
     </div>` : "";
-  return `<div class="rad${erAvbud ? " avbud" : ""}">
-    <div class="c1"><span class="nr">${nr}.</span><span class="navn">${esc(r.navn)}</span><br>${ikkeMedlem}${avbudinfo}</div>
-    <div class="c2">${esc(r.telefon)}${r.epost ? `<br><span class="liten">${esc(r.epost)}</span>` : ""}${r.bosted ? `<br><span class="liten">${esc(r.bosted)}</span>` : ""}</div>
-    <div class="c3">${merker}${tekst ? `<div class="liten">${tekst}</div>` : ""}</div>
-    <div class="c4 liten">Påmeldt<br>${tid(r.opprettet)}</div>
-    <div class="c5 handling">${knapper}</div>
-    ${skjema}
+  const aapen = aapneRader.has(r.id);
+  return `<div class="rad${erAvbud ? " avbud" : ""}${aapen ? " aapen" : ""}${markert === r.id ? " markert" : ""}" id="rad-${r.id}">
+    <button class="radtopp" data-veksle="${r.id}" aria-expanded="${aapen}">
+      <span class="nr">${nr}.</span><span class="navn">${esc(r.navn)}</span>
+      ${r.ledsager ? '<span class="merk im">+1</span>' : ""}${merker}
+      <span class="pil" aria-hidden="true">${aapen ? "▲" : "▼"}</span>
+    </button>
+    ${aapen ? `<div class="detaljer">
+      <div class="c1">${ikkeMedlem}${avbudinfo}<div class="liten">Påmeldt ${tid(r.opprettet)}</div></div>
+      <div class="c2">📞 ${esc(r.telefon)}${r.epost ? `<br><span class="liten">✉️ ${esc(r.epost)}</span>` : ""}${r.bosted ? `<br><span class="liten">📍 ${esc(r.bosted)}</span>` : ""}</div>
+      <div class="c3">${tekst ? `<div class="liten">${tekst}</div>` : '<span class="liten">Ingen ønsker eller hilsen</span>'}</div>
+      <div class="c5 handling">${knapper}</div>
+      ${skjema}
+    </div>` : ""}
   </div>`;
+}
+
+// Navneoversikt øverst: alle navn alfabetisk, klikk hopper ned og åpner personen
+function navneoversikt(aktive, avbud){
+  const sorter = a => [...a].sort((x,y) => x.navn.localeCompare(y.navn, "nb"));
+  const knapp = (r, av) => `<button class="navneknapp${av ? " av" : ""}" data-hopp="${r.id}">${esc(r.navn)}${r.ledsager ? " <small>+1</small>" : ""}</button>`;
+  document.getElementById("navneoversikt").innerHTML =
+    sorter(aktive).map(r => knapp(r, false)).join("") +
+    (avbud.length ? `<span class="skille">Meldt avbud:</span>` + sorter(avbud).map(r => knapp(r, true)).join("") : "");
 }
 
 function tegn(kapasitet){
@@ -204,9 +248,9 @@ function tegn(kapasitet){
 
   const visAktive = aktive.filter(treff), visAvbud = avbud.filter(treff);
   document.getElementById("antall-aktive").textContent = `(${aktive.length} påmeldinger, ${personer} personer)`;
-  const hode = '<div class="hode"><div>Navn</div><div>Kontakt</div><div>Ønsker og mat</div><div>Påmeldt</div><div></div></div>';
-  document.getElementById("aktive").innerHTML = visAktive.length ? hode + visAktive.map((r,i) => radHtml(r, i+1, false)).join("") : '<div class="tom">Ingen påmeldte å vise.</div>';
-  document.getElementById("avbudliste").innerHTML = visAvbud.length ? hode + visAvbud.map((r,i) => radHtml(r, i+1, true)).join("") : '<div class="tom">Ingen har meldt avbud.</div>';
+  navneoversikt(aktive, avbud);
+  document.getElementById("aktive").innerHTML = visAktive.length ? visAktive.map((r,i) => radHtml(r, i+1, false)).join("") : '<div class="tom">Ingen påmeldte å vise.</div>';
+  document.getElementById("avbudliste").innerHTML = visAvbud.length ? visAvbud.map((r,i) => radHtml(r, i+1, true)).join("") : '<div class="tom">Ingen har meldt avbud.</div>';
 
   const hot = aktive.filter(r => r.trenger_hotell);
   document.getElementById("hotell").innerHTML = hot.length ? hot.map(r => `<li><b>${esc(r.navn)}</b>${r.ledsager ? " (+1)" : ""}: ${esc(r.telefon)}${r.epost ? " · " + esc(r.epost) : ""}</li>`).join("") : "<li>Ingen har bedt om hotell.</li>";
@@ -243,6 +287,7 @@ async function apne(k){
   const f = document.getElementById("loggfeil"); f.textContent = "";
   try{
     if(await hent()){
+      try{ localStorage.setItem("julebord-styrekode", k); }catch(e){}
       document.getElementById("logg").hidden = true;
       document.getElementById("innhold").hidden = false;
       setInterval(() => { if(aapentAvbud === null) hent().catch(()=>{}); }, 60000);
@@ -253,7 +298,9 @@ async function apne(k){
   document.getElementById("logg").hidden = false;
   return false;
 }
-const lenkeKode = decodeURIComponent(location.hash.slice(1)).trim();
+// Koden fra lenken, eller husket fra forrige gang på denne PC-en, så kodeboksen slipper å vises
+let lagretKode = ""; try{ lagretKode = localStorage.getItem("julebord-styrekode") || ""; }catch(e){}
+const lenkeKode = decodeURIComponent(location.hash.slice(1)).trim() || lagretKode;
 if(lenkeKode){
   document.getElementById("logg").hidden = true;
   apne(lenkeKode);
@@ -264,6 +311,17 @@ document.getElementById("sok").addEventListener("input", () => tegn(sisteKap));
 
 document.getElementById("innhold").addEventListener("click", async e => {
   const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.veksle){ const id = Number(b.dataset.veksle); aapneRader.has(id) ? aapneRader.delete(id) : aapneRader.add(id); markert = null; tegn(sisteKap); return; }
+  if(b.dataset.hopp){
+    const id = Number(b.dataset.hopp);
+    const s = document.getElementById("sok"); if(s.value){ s.value = ""; }
+    aapneRader.add(id); markert = id; tegn(sisteKap);
+    const rad = document.getElementById("rad-" + id);
+    if(rad){ rad.scrollIntoView({block:"center", behavior:"smooth"}); rad.querySelector(".radtopp").focus({preventScroll:true}); }
+    return;
+  }
+  if(b.dataset.alle){ const aapne = b.dataset.alle === "aapne"; data.forEach(r => aapne ? aapneRader.add(r.id) : aapneRader.delete(r.id)); markert = null; tegn(sisteKap); return; }
+  if(b.dataset.tilbake){ document.getElementById("navn-seksjon").scrollIntoView({block:"start", behavior:"smooth"}); return; }
   if(b.dataset.avbud){ aapentAvbud = Number(b.dataset.avbud); tegn(sisteKap); document.getElementById("av-hvordan").focus(); return; }
   if(b.dataset.lukk){ aapentAvbud = null; tegn(sisteKap); return; }
   if(b.dataset.lagreavbud){
